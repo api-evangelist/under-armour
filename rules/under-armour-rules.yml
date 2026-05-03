@@ -1,0 +1,96 @@
+extends: spectral:oas
+rules:
+  ua-operation-ids-required:
+    description: All operations must have an operationId
+    message: Operation must have an operationId
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete,options,head]
+    then:
+      field: operationId
+      function: truthy
+
+  ua-operation-summary-title-case:
+    description: Operation summaries must use Title Case
+    message: Summary "{{value}}" must use Title Case
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[A-Z][a-zA-Z0-9]*([ ][A-Z][a-zA-Z0-9]*)*$'
+
+  ua-tags-required:
+    description: Operations must have at least one tag
+    message: Operation must include at least one tag
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: tags
+      function: truthy
+
+  ua-path-trailing-slash:
+    description: Paths should use trailing slash per Under Armour API convention
+    message: Under Armour API paths use trailing slashes
+    severity: info
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: '.*\/$'
+
+  ua-responses-must-include-success:
+    description: Operations must define at least one 2xx success response
+    message: Operation must define at least one 2xx response
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          minProperties: 1
+
+  ua-oauth2-security-defined:
+    description: API must define OAuth2 security scheme
+    message: Under Armour APIs require OAuth 2.0 security
+    severity: error
+    given: $.components.securitySchemes
+    then:
+      function: truthy
+
+  ua-version-prefix-in-path:
+    description: Paths must include API version prefix
+    message: Path must include a version prefix like /v7.1/
+    severity: warn
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: '^\/v[0-9]+\.[0-9]+\/'
+
+  ua-path-parameters-described:
+    description: Path parameters must include a description
+    message: Path parameter must have a description
+    severity: warn
+    given: $.paths[*][*].parameters[?(@.in == "path")]
+    then:
+      field: description
+      function: truthy
+
+  ua-delete-returns-204:
+    description: DELETE operations should return 204 No Content
+    message: DELETE operation should include a 204 response
+    severity: warn
+    given: $.paths[*].delete.responses
+    then:
+      field: '204'
+      function: truthy
+
+  ua-post-returns-201:
+    description: POST create operations should return 201 Created
+    message: POST create operation should include a 201 response
+    severity: warn
+    given: $.paths[*].post.responses
+    then:
+      field: '201'
+      function: truthy

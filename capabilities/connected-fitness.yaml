@@ -1,0 +1,307 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Under Armour Connected Fitness"
+  description: >-
+    Unified capability for Under Armour's Connected Fitness platform.
+    Combines workout tracking, route management, user profiles, and heart
+    rate zones into a single workflow surface for fitness app developers,
+    health platform integrators, and athlete analytics use cases.
+  tags:
+    - Under Armour
+    - Fitness
+    - Connected Fitness
+    - Workouts
+    - Routes
+    - Health
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      MAPMYFITNESS_ACCESS_TOKEN: MAPMYFITNESS_ACCESS_TOKEN
+
+capability:
+  consumes:
+    - import: mapmyfitness
+      location: ./shared/mapmyfitness.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: connected-fitness-api
+      description: "Unified REST API for Under Armour Connected Fitness."
+      resources:
+        - path: /v1/workouts
+          name: workouts
+          description: "Fitness workouts with aggregates"
+          operations:
+            - method: GET
+              name: list-workouts
+              description: "List workouts for a user"
+              call: "mapmyfitness.list-workouts"
+              with:
+                user: "rest.user"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-workout
+              description: "Create a new workout"
+              call: "mapmyfitness.create-workout"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/workouts/{id}
+          name: workout-item
+          description: "Single workout record"
+          operations:
+            - method: GET
+              name: get-workout
+              description: "Get a workout by ID"
+              call: "mapmyfitness.get-workout"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-workout
+              description: "Delete a workout"
+              call: "mapmyfitness.delete-workout"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/routes
+          name: routes
+          description: "Fitness routes with GPS data"
+          operations:
+            - method: GET
+              name: list-routes
+              description: "List routes for a user or near a location"
+              call: "mapmyfitness.list-routes"
+              with:
+                user: "rest.user"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-route
+              description: "Create a new route"
+              call: "mapmyfitness.create-route"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/routes/{id}
+          name: route-item
+          description: "Single route with optional GPS waypoints"
+          operations:
+            - method: GET
+              name: get-route
+              description: "Get a route by ID"
+              call: "mapmyfitness.get-route"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/users/me
+          name: current-user
+          description: "Current authenticated user profile"
+          operations:
+            - method: GET
+              name: get-current-user
+              description: "Get the authenticated user's profile"
+              call: "mapmyfitness.get-current-user"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/users
+          name: users
+          description: "User search and social connections"
+          operations:
+            - method: GET
+              name: list-users
+              description: "Search users or retrieve friend connections"
+              call: "mapmyfitness.list-users"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/heart-rate-zones
+          name: heart-rate-zones
+          description: "Heart rate training zones"
+          operations:
+            - method: GET
+              name: list-heart-rate-zones
+              description: "Get heart rate zones for a user"
+              call: "mapmyfitness.list-heart-rate-zones"
+              with:
+                user: "rest.user"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/devices
+          name: devices
+          description: "Registered fitness devices"
+          operations:
+            - method: GET
+              name: list-devices
+              description: "List fitness devices for a user"
+              call: "mapmyfitness.list-devices"
+              with:
+                user: "rest.user"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/webhooks
+          name: webhooks
+          description: "Webhook event subscriptions"
+          operations:
+            - method: GET
+              name: list-webhooks
+              description: "List webhook subscriptions"
+              call: "mapmyfitness.list-webhooks"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-webhook
+              description: "Create a webhook subscription"
+              call: "mapmyfitness.create-webhook"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: connected-fitness-mcp
+      transport: http
+      description: "MCP server for AI-assisted fitness tracking and analysis with Under Armour Connected Fitness."
+      tools:
+        - name: list-workouts
+          description: "List fitness workouts for a user with optional date and activity type filters"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "mapmyfitness.list-workouts"
+          with:
+            user: "tools.user"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-workout
+          description: "Get a specific workout record including aggregate metrics and optional time series GPS data"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "mapmyfitness.get-workout"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-workout
+          description: "Record a new fitness workout with distance, time, and energy metrics"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "mapmyfitness.create-workout"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-workout
+          description: "Delete a workout record"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "mapmyfitness.delete-workout"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-routes
+          description: "List fitness routes for a user or near a geographic location"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "mapmyfitness.list-routes"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-route
+          description: "Get route details including GPS waypoints and elevation data"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "mapmyfitness.get-route"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-route
+          description: "Create a new fitness route with GPS waypoints"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "mapmyfitness.create-route"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-current-user
+          description: "Get the profile of the currently authenticated user"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "mapmyfitness.get-current-user"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-users
+          description: "Search for users or retrieve social connections and friend lists"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "mapmyfitness.list-users"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-heart-rate-zones
+          description: "Get heart rate training zones configured for a user"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "mapmyfitness.list-heart-rate-zones"
+          with:
+            user: "tools.user"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-devices
+          description: "List fitness devices and wearables registered to a user"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "mapmyfitness.list-devices"
+          with:
+            user: "tools.user"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-webhook
+          description: "Subscribe to fitness events like workout creation and updates via webhook"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "mapmyfitness.create-webhook"
+          outputParameters:
+            - type: object
+              mapping: "$."

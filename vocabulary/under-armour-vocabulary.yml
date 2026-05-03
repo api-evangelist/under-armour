@@ -1,0 +1,101 @@
+name: Under Armour Vocabulary
+description: >-
+  Vocabulary and taxonomy for the Under Armour Connected Fitness platform
+  (MapMyFitness API), covering fitness tracking concepts, API resources,
+  activity types, and athlete data terminology.
+tags:
+  - Fitness
+  - Connected Fitness
+  - Workouts
+  - Health
+  - Sports
+modified: '2026-05-03'
+
+domains:
+  - name: Workout Concepts
+    description: Core concepts related to fitness workout tracking
+    terms:
+      - term: Workout
+        definition: A recorded fitness activity session with start time, duration, distance, and energy metrics
+      - term: Aggregate
+        definition: A summary metric computed over the entire workout (total distance, average heart rate, etc.)
+      - term: Time Series
+        definition: Sensor readings or GPS positions sampled at regular intervals throughout a workout
+      - term: Activity Type
+        definition: The category of physical activity performed (running, cycling, swimming, etc.)
+      - term: Metabolic Energy
+        definition: Energy expended during a workout, measured in joules
+      - term: Active Time
+        definition: The portion of elapsed workout time with measurable physical activity
+      - term: Elapsed Time
+        definition: Total wall-clock duration from workout start to finish
+
+  - name: Route Concepts
+    description: Concepts related to fitness routes and geographic data
+    terms:
+      - term: Route
+        definition: A geographic path for a fitness activity, defined by GPS waypoints
+      - term: Waypoint
+        definition: A single GPS coordinate (longitude, latitude, elevation) along a route
+      - term: Total Ascent
+        definition: Cumulative elevation gain along the route in meters
+      - term: Total Descent
+        definition: Cumulative elevation loss along the route in meters
+      - term: Starting Location
+        definition: The GPS coordinate marking the beginning of a route
+      - term: Close-to-Location
+        definition: A proximity search parameter for finding routes near a geographic coordinate
+
+  - name: User and Social Concepts
+    description: Concepts related to user profiles and social fitness features
+    terms:
+      - term: Connected Fitness
+        definition: Under Armour's platform for linking wearables, apps, and tracking data into a unified fitness profile
+      - term: Friends
+        definition: Social connections between users enabling activity sharing and challenges
+      - term: Privacy
+        definition: User-configurable visibility settings for workouts, routes, profile data, and body metrics
+      - term: Measurement System
+        definition: Preference for imperial (US) or metric units for displaying fitness data
+      - term: Goal Statement
+        definition: A user's stated fitness goal displayed on their profile
+
+  - name: Heart Rate and Training Zones
+    description: Heart rate monitoring and training zone concepts
+    terms:
+      - term: Heart Rate Zone
+        definition: A named intensity range (Zone 1-5) defined by minimum and maximum heart rate in beats per minute
+      - term: Max Heart Rate
+        definition: The highest recorded heart rate during a workout session
+      - term: Average Heart Rate
+        definition: The mean heart rate computed across the active portion of a workout
+      - term: Cadence
+        definition: Pedaling or stride frequency measured in revolutions or steps per minute
+
+  - name: API Technical Concepts
+    description: Technical terminology for the MapMyFitness REST API
+    terms:
+      - term: HATEOAS
+        definition: Hypermedia as the Engine of Application State — the API uses _links objects to provide navigation hrefs
+      - term: Field Set
+        definition: A query parameter controlling which fields are returned (default vs. detailed or time_series)
+      - term: OAuth 2.0
+        definition: The authorization protocol used to grant third-party apps access to user fitness data
+      - term: Access Token
+        definition: A short-lived Bearer token issued by OAuth 2 that authorizes API requests on behalf of a user
+      - term: Webhook
+        definition: An HTTP callback that delivers real-time fitness event notifications to a registered URL
+      - term: Shared Secret
+        definition: A key included in webhook payloads for verifying their authenticity via HMAC
+
+  - name: Devices and Integrations
+    description: Fitness hardware and integration concepts
+    terms:
+      - term: Data Source
+        definition: The app or device that submitted a workout to the Connected Fitness platform
+      - term: Device
+        definition: A registered fitness wearable or sensor (GPS watch, heart rate monitor, etc.)
+      - term: Wearable
+        definition: A body-worn electronic device that captures fitness metrics
+      - term: MapMyFitness
+        definition: Under Armour's flagship fitness tracking platform powering MapMyRun, MapMyRide, and MapMyWalk

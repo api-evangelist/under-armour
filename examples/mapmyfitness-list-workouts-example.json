@@ -1,0 +1,46 @@
+{
+  "summary": "List workouts for a user",
+  "request": {
+    "method": "GET",
+    "url": "https://api.ua.com/v7.1/workout/?user=1234567&order_by=-start_datetime&limit=5",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "total_count": 142,
+      "_links": {
+        "self": [{"href": "/v7.1/workout/?user=1234567&limit=5&offset=0"}],
+        "next": [{"href": "/v7.1/workout/?user=1234567&limit=5&offset=5"}]
+      },
+      "_embedded": {
+        "workouts": [
+          {
+            "name": "Morning Run",
+            "start_datetime": "2026-05-01T07:30:00+00:00",
+            "start_locale_timezone": "America/New_York",
+            "aggregates": {
+              "distance_total": 8046.72,
+              "active_time_total": 2400,
+              "elapsed_time_total": 2520,
+              "metabolic_energy_total": 2260000,
+              "speed_avg": 3.35,
+              "heartrate_avg": 152,
+              "heartrate_max": 178
+            },
+            "_links": {
+              "self": [{"href": "/v7.1/workout/789012345/"}],
+              "activity_type": [{"href": "/v7.1/activity_type/16/"}]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

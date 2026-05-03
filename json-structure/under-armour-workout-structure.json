@@ -1,0 +1,25 @@
+{
+  "title": "Under Armour Workout Structure",
+  "description": "Field-level documentation for the MapMyFitness Workout entity.",
+  "type": "object",
+  "fields": [
+    { "name": "name", "type": "string", "required": true, "description": "Workout title" },
+    { "name": "start_datetime", "type": "datetime", "required": true, "description": "ISO 8601 start time" },
+    { "name": "start_locale_timezone", "type": "string", "required": true, "description": "IANA timezone" },
+    { "name": "aggregates", "type": "object", "required": true, "description": "Aggregate fitness metrics",
+      "fields": [
+        { "name": "distance_total", "type": "number", "required": false, "description": "Total distance in meters" },
+        { "name": "steps_total", "type": "integer", "required": false, "description": "Total step count" },
+        { "name": "active_time_total", "type": "number", "required": false, "description": "Active time in seconds" },
+        { "name": "elapsed_time_total", "type": "number", "required": false, "description": "Elapsed time in seconds" },
+        { "name": "metabolic_energy_total", "type": "number", "required": false, "description": "Energy in joules" },
+        { "name": "speed_avg", "type": "number", "required": false, "description": "Average speed m/s" },
+        { "name": "heartrate_avg", "type": "number", "required": false, "description": "Average heart rate bpm" },
+        { "name": "heartrate_max", "type": "number", "required": false, "description": "Maximum heart rate bpm" },
+        { "name": "heartrate_min", "type": "number", "required": false, "description": "Minimum heart rate bpm" }
+      ]
+    },
+    { "name": "activity_type", "type": "object", "required": false, "description": "Link to the activity type" },
+    { "name": "time_series", "type": "object", "required": false, "description": "GPS and metric samples (returned with field_set=time_series)" }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/api-evangelist/under-armour/blob/main/json-schema/under-armour-workout-schema.json",
+  "title": "Under Armour Workout",
+  "description": "Schema for a MapMyFitness workout record including aggregates, metadata, and optional time series data.",
+  "type": "object",
+  "required": ["name", "start_datetime", "start_locale_timezone", "aggregates"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Workout title"
+    },
+    "start_datetime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 start time of the workout"
+    },
+    "start_locale_timezone": {
+      "type": "string",
+      "description": "IANA timezone identifier for the workout location"
+    },
+    "aggregates": {
+      "type": "object",
+      "description": "Aggregate metrics for the workout",
+      "properties": {
+        "distance_total": {
+          "type": "number",
+          "description": "Total distance in meters"
+        },
+        "steps_total": {
+          "type": "integer",
+          "description": "Total step count"
+        },
+        "active_time_total": {
+          "type": "number",
+          "description": "Total active time in seconds"
+        },
+        "elapsed_time_total": {
+          "type": "number",
+          "description": "Total elapsed time in seconds"
+        },
+        "metabolic_energy_total": {
+          "type": "number",
+          "description": "Total energy expenditure in joules"
+        },
+        "speed_avg": {
+          "type": "number",
+          "description": "Average speed in meters/second"
+        },
+        "heartrate_avg": {
+          "type": "number",
+          "description": "Average heart rate in beats/minute"
+        },
+        "heartrate_max": {
+          "type": "number",
+          "description": "Maximum heart rate in beats/minute"
+        },
+        "heartrate_min": {
+          "type": "number",
+          "description": "Minimum heart rate in beats/minute"
+        }
+      }
+    },
+    "activity_type": {
+      "type": "object",
+      "description": "Reference to the activity type"
+    },
+    "time_series": {
+      "type": "object",
+      "description": "Time series data available when field_set=time_series is requested",
+      "properties": {
+        "position": {
+          "type": "array",
+          "description": "GPS position samples [offset_seconds, {lat, lng, elevation}]",
+          "items": {
+            "type": "array"
+          }
+        },
+        "distance": {
+          "type": "array",
+          "description": "Cumulative distance samples [offset_seconds, meters]",
+          "items": {
+            "type": "array"
+          }
+        },
+        "heartrate": {
+          "type": "array",
+          "description": "Heart rate samples [offset_seconds, bpm]",
+          "items": {
+            "type": "array"
+          }
+        },
+        "speed": {
+          "type": "array",
+          "description": "Speed samples [offset_seconds, m/s]",
+          "items": {
+            "type": "array"
+          }
+        }
+      }
+    }
+  }
+}

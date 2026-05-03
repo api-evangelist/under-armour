@@ -1,0 +1,97 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "ua": "https://github.com/api-evangelist/under-armour/blob/main/json-ld/under-armour-context.jsonld#",
+
+    "Workout": "schema:ExerciseAction",
+    "Route": "schema:ExercisePlan",
+    "User": "schema:Person",
+    "Device": "schema:Product",
+
+    "name": "schema:name",
+    "description": "schema:description",
+    "start_datetime": {
+      "@id": "schema:startTime",
+      "@type": "xsd:dateTime"
+    },
+    "start_locale_timezone": {
+      "@id": "schema:eventSchedule",
+      "@type": "xsd:string"
+    },
+    "aggregates": {
+      "@id": "ua:aggregates",
+      "@type": "@id"
+    },
+    "distance_total": {
+      "@id": "schema:distance",
+      "@type": "xsd:decimal"
+    },
+    "steps_total": {
+      "@id": "schema:numberOfSteps",
+      "@type": "xsd:integer"
+    },
+    "active_time_total": {
+      "@id": "schema:duration",
+      "@type": "xsd:decimal"
+    },
+    "metabolic_energy_total": {
+      "@id": "schema:energy",
+      "@type": "xsd:decimal"
+    },
+    "heartrate_avg": {
+      "@id": "ua:averageHeartRate",
+      "@type": "xsd:decimal"
+    },
+    "heartrate_max": {
+      "@id": "ua:maxHeartRate",
+      "@type": "xsd:decimal"
+    },
+    "speed_avg": {
+      "@id": "ua:averageSpeed",
+      "@type": "xsd:decimal"
+    },
+    "activity_type": {
+      "@id": "schema:exerciseType",
+      "@type": "@id"
+    },
+    "username": "schema:identifier",
+    "email": "schema:email",
+    "first_name": "schema:givenName",
+    "last_name": "schema:familyName",
+    "birthdate": {
+      "@id": "schema:birthDate",
+      "@type": "xsd:date"
+    },
+    "height": {
+      "@id": "schema:height",
+      "@type": "xsd:decimal"
+    },
+    "weight": {
+      "@id": "schema:weight",
+      "@type": "xsd:decimal"
+    },
+    "time_zone": "schema:homeLocation",
+    "date_joined": {
+      "@id": "schema:startDate",
+      "@type": "xsd:dateTime"
+    },
+    "distance": {
+      "@id": "schema:distance",
+      "@type": "xsd:decimal"
+    },
+    "city": "schema:addressLocality",
+    "state": "schema:addressRegion",
+    "country": "schema:addressCountry",
+    "postal_code": "schema:postalCode",
+    "callback_url": {
+      "@id": "ua:callbackUrl",
+      "@type": "@id"
+    },
+    "event_type": {
+      "@id": "ua:eventType",
+      "@type": "xsd:string"
+    }
+  }
+}
