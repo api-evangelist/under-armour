@@ -54,13 +54,13 @@ common:
     url: https://developer.mapmyfitness.com/docs/
   - type: Authentication
     url: https://developer.mapmyfitness.com/docs/v71_OAuth_2_Intro/
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://developer.mapmyfitness.com/Terms_Of_Service/
   - type: GitHub Org
     url: https://github.com/underarmour
   - type: OpenAPI
     url: openapi/mapmyfitness-openapi.yml
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/under-armour-context.jsonld
   - type: Vocabulary
     url: vocabulary/under-armour-vocabulary.yml
