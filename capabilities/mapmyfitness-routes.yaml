@@ -1,0 +1,281 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: MapMyFitness API — Routes
+  description: 'MapMyFitness API — Routes. 5 operations. Lead operation: List Routes. Self-contained Naftiko capability covering
+    one Under Armour business surface.'
+  tags:
+  - Under Armour
+  - Routes
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNDER_ARMOUR_API_KEY: UNDER_ARMOUR_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: mapmyfitness-routes
+    baseUri: https://api.ua.com
+    description: MapMyFitness API — Routes business capability. Self-contained, no shared references.
+    resources:
+    - name: v7.1-route
+      path: /v7.1/route/
+      operations:
+      - name: listroutes
+        method: GET
+        description: List Routes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user
+          in: query
+          type: string
+          description: User resource href or ID (required if close_to_location not specified)
+        - name: close_to_location
+          in: query
+          type: string
+          description: Lat,lng coordinate pair to find nearby routes (required if user not specified)
+        - name: search_radius
+          in: query
+          type: integer
+          description: Search radius in meters (0-50000, default 5000). Used with close_to_location.
+        - name: minimum_distance
+          in: query
+          type: number
+          description: Minimum route distance in meters
+        - name: maximum_distance
+          in: query
+          type: number
+          description: Maximum route distance in meters
+        - name: text_search
+          in: query
+          type: string
+          description: Search routes by name or description
+        - name: order_by
+          in: query
+          type: string
+          description: Sort field
+        - name: field_set
+          in: query
+          type: string
+          description: Field set level — default or detailed (includes GPS points and elevation)
+      - name: createroute
+        method: POST
+        description: Create Route
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v7.1-route-id
+      path: /v7.1/route/{id}/
+      operations:
+      - name: getroute
+        method: GET
+        description: Get Route
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Route ID
+          required: true
+        - name: field_set
+          in: query
+          type: string
+          description: Field set — default or detailed
+      - name: updateroute
+        method: PUT
+        description: Update Route
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Route ID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteroute
+        method: DELETE
+        description: Delete Route
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Route ID
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.UNDER_ARMOUR_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: mapmyfitness-routes-rest
+    port: 8080
+    description: REST adapter for MapMyFitness API — Routes. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v7-1/route
+      name: v7-1-route
+      description: REST surface for v7.1-route.
+      operations:
+      - method: GET
+        name: listroutes
+        description: List Routes
+        call: mapmyfitness-routes.listroutes
+        with:
+          user: rest.user
+          close_to_location: rest.close_to_location
+          search_radius: rest.search_radius
+          minimum_distance: rest.minimum_distance
+          maximum_distance: rest.maximum_distance
+          text_search: rest.text_search
+          order_by: rest.order_by
+          field_set: rest.field_set
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createroute
+        description: Create Route
+        call: mapmyfitness-routes.createroute
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v7-1/route/{id}
+      name: v7-1-route-id
+      description: REST surface for v7.1-route-id.
+      operations:
+      - method: GET
+        name: getroute
+        description: Get Route
+        call: mapmyfitness-routes.getroute
+        with:
+          id: rest.id
+          field_set: rest.field_set
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateroute
+        description: Update Route
+        call: mapmyfitness-routes.updateroute
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteroute
+        description: Delete Route
+        call: mapmyfitness-routes.deleteroute
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: mapmyfitness-routes-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for MapMyFitness API — Routes. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-routes
+      description: List Routes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mapmyfitness-routes.listroutes
+      with:
+        user: tools.user
+        close_to_location: tools.close_to_location
+        search_radius: tools.search_radius
+        minimum_distance: tools.minimum_distance
+        maximum_distance: tools.maximum_distance
+        text_search: tools.text_search
+        order_by: tools.order_by
+        field_set: tools.field_set
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-route
+      description: Create Route
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: mapmyfitness-routes.createroute
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-route
+      description: Get Route
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mapmyfitness-routes.getroute
+      with:
+        id: tools.id
+        field_set: tools.field_set
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-route
+      description: Update Route
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: mapmyfitness-routes.updateroute
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-route
+      description: Delete Route
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: mapmyfitness-routes.deleteroute
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,147 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: MapMyFitness API — Webhooks
+  description: 'MapMyFitness API — Webhooks. 3 operations. Lead operation: List Webhooks. Self-contained Naftiko capability
+    covering one Under Armour business surface.'
+  tags:
+  - Under Armour
+  - Webhooks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNDER_ARMOUR_API_KEY: UNDER_ARMOUR_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: mapmyfitness-webhooks
+    baseUri: https://api.ua.com
+    description: MapMyFitness API — Webhooks business capability. Self-contained, no shared references.
+    resources:
+    - name: v7.1-webhook
+      path: /v7.1/webhook/
+      operations:
+      - name: listwebhooks
+        method: GET
+        description: List Webhooks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createwebhook
+        method: POST
+        description: Create Webhook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v7.1-webhook-id
+      path: /v7.1/webhook/{id}/
+      operations:
+      - name: deletewebhook
+        method: DELETE
+        description: Delete Webhook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Webhook ID
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.UNDER_ARMOUR_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: mapmyfitness-webhooks-rest
+    port: 8080
+    description: REST adapter for MapMyFitness API — Webhooks. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v7-1/webhook
+      name: v7-1-webhook
+      description: REST surface for v7.1-webhook.
+      operations:
+      - method: GET
+        name: listwebhooks
+        description: List Webhooks
+        call: mapmyfitness-webhooks.listwebhooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createwebhook
+        description: Create Webhook
+        call: mapmyfitness-webhooks.createwebhook
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v7-1/webhook/{id}
+      name: v7-1-webhook-id
+      description: REST surface for v7.1-webhook-id.
+      operations:
+      - method: DELETE
+        name: deletewebhook
+        description: Delete Webhook
+        call: mapmyfitness-webhooks.deletewebhook
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: mapmyfitness-webhooks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for MapMyFitness API — Webhooks. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-webhooks
+      description: List Webhooks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mapmyfitness-webhooks.listwebhooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-webhook
+      description: Create Webhook
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: mapmyfitness-webhooks.createwebhook
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-webhook
+      description: Delete Webhook
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: mapmyfitness-webhooks.deletewebhook
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

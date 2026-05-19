@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: MapMyFitness API — Heart Rate Zones
+  description: 'MapMyFitness API — Heart Rate Zones. 1 operations. Lead operation: List Heart Rate Zones. Self-contained Naftiko
+    capability covering one Under Armour business surface.'
+  tags:
+  - Under Armour
+  - Heart Rate Zones
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNDER_ARMOUR_API_KEY: UNDER_ARMOUR_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: mapmyfitness-heart-rate-zones
+    baseUri: https://api.ua.com
+    description: MapMyFitness API — Heart Rate Zones business capability. Self-contained, no shared references.
+    resources:
+    - name: v7.1-heart_rate_zone
+      path: /v7.1/heart_rate_zone/
+      operations:
+      - name: listheartratezones
+        method: GET
+        description: List Heart Rate Zones
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user
+          in: query
+          type: string
+          description: User ID to retrieve heart rate zones for
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.UNDER_ARMOUR_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: mapmyfitness-heart-rate-zones-rest
+    port: 8080
+    description: REST adapter for MapMyFitness API — Heart Rate Zones. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v7-1/heart-rate-zone
+      name: v7-1-heart-rate-zone
+      description: REST surface for v7.1-heart_rate_zone.
+      operations:
+      - method: GET
+        name: listheartratezones
+        description: List Heart Rate Zones
+        call: mapmyfitness-heart-rate-zones.listheartratezones
+        with:
+          user: rest.user
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: mapmyfitness-heart-rate-zones-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for MapMyFitness API — Heart Rate Zones. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-heart-rate-zones
+      description: List Heart Rate Zones
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mapmyfitness-heart-rate-zones.listheartratezones
+      with:
+        user: tools.user
+      outputParameters:
+      - type: object
+        mapping: $.

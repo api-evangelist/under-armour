@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: MapMyFitness API — Devices
+  description: 'MapMyFitness API — Devices. 1 operations. Lead operation: List Devices. Self-contained Naftiko capability
+    covering one Under Armour business surface.'
+  tags:
+  - Under Armour
+  - Devices
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNDER_ARMOUR_API_KEY: UNDER_ARMOUR_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: mapmyfitness-devices
+    baseUri: https://api.ua.com
+    description: MapMyFitness API — Devices business capability. Self-contained, no shared references.
+    resources:
+    - name: v7.1-device
+      path: /v7.1/device/
+      operations:
+      - name: listdevices
+        method: GET
+        description: List Devices
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user
+          in: query
+          type: string
+          description: User ID to retrieve devices for
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.UNDER_ARMOUR_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: mapmyfitness-devices-rest
+    port: 8080
+    description: REST adapter for MapMyFitness API — Devices. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v7-1/device
+      name: v7-1-device
+      description: REST surface for v7.1-device.
+      operations:
+      - method: GET
+        name: listdevices
+        description: List Devices
+        call: mapmyfitness-devices.listdevices
+        with:
+          user: rest.user
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: mapmyfitness-devices-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for MapMyFitness API — Devices. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-devices
+      description: List Devices
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mapmyfitness-devices.listdevices
+      with:
+        user: tools.user
+      outputParameters:
+      - type: object
+        mapping: $.

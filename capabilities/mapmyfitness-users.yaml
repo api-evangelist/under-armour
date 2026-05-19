@@ -1,0 +1,213 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: MapMyFitness API — Users
+  description: 'MapMyFitness API — Users. 4 operations. Lead operation: List Users. Self-contained Naftiko capability covering
+    one Under Armour business surface.'
+  tags:
+  - Under Armour
+  - Users
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNDER_ARMOUR_API_KEY: UNDER_ARMOUR_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: mapmyfitness-users
+    baseUri: https://api.ua.com
+    description: MapMyFitness API — Users business capability. Self-contained, no shared references.
+    resources:
+    - name: v7.1-user
+      path: /v7.1/user/
+      operations:
+      - name: listusers
+        method: GET
+        description: List Users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: q
+          in: query
+          type: string
+          description: Search users by name or email
+        - name: friends_with
+          in: query
+          type: string
+          description: Get users that the specified user is friends with
+        - name: mutual_friends_for
+          in: query
+          type: string
+          description: Retrieve mutual friend relationships
+        - name: email
+          in: query
+          type: string
+          description: Search by email address
+    - name: v7.1-user-self
+      path: /v7.1/user/self/
+      operations:
+      - name: getcurrentuser
+        method: GET
+        description: Get Current User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v7.1-user-id
+      path: /v7.1/user/{id}/
+      operations:
+      - name: getuser
+        method: GET
+        description: Get User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: User ID
+          required: true
+      - name: updateuser
+        method: PUT
+        description: Update User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: User ID (must match authenticated user)
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.UNDER_ARMOUR_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: mapmyfitness-users-rest
+    port: 8080
+    description: REST adapter for MapMyFitness API — Users. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v7-1/user
+      name: v7-1-user
+      description: REST surface for v7.1-user.
+      operations:
+      - method: GET
+        name: listusers
+        description: List Users
+        call: mapmyfitness-users.listusers
+        with:
+          q: rest.q
+          friends_with: rest.friends_with
+          mutual_friends_for: rest.mutual_friends_for
+          email: rest.email
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v7-1/user/self
+      name: v7-1-user-self
+      description: REST surface for v7.1-user-self.
+      operations:
+      - method: GET
+        name: getcurrentuser
+        description: Get Current User
+        call: mapmyfitness-users.getcurrentuser
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v7-1/user/{id}
+      name: v7-1-user-id
+      description: REST surface for v7.1-user-id.
+      operations:
+      - method: GET
+        name: getuser
+        description: Get User
+        call: mapmyfitness-users.getuser
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateuser
+        description: Update User
+        call: mapmyfitness-users.updateuser
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: mapmyfitness-users-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for MapMyFitness API — Users. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-users
+      description: List Users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mapmyfitness-users.listusers
+      with:
+        q: tools.q
+        friends_with: tools.friends_with
+        mutual_friends_for: tools.mutual_friends_for
+        email: tools.email
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-current-user
+      description: Get Current User
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mapmyfitness-users.getcurrentuser
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user
+      description: Get User
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: mapmyfitness-users.getuser
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-user
+      description: Update User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: mapmyfitness-users.updateuser
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
