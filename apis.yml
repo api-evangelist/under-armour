@@ -1,9 +1,10 @@
 aid: under-armour
 name: Under Armour
-description: Under Armour is an American company that manufactures footwear, sports, and casual apparel known for its performance
-  products designed for athletes. Under Armour operates a Connected Fitness platform — powered by MapMyFitness — that provides
-  developer APIs for integrating workout tracking, route data, user profiles, heart rate zones, and fitness devices into third-party
-  applications.
+description: >-
+  Under Armour is an American company that manufactures footwear, sports, and casual apparel known for its performance
+  products designed for athletes. Under Armour operates a Connected Fitness platform — powered by MapMyFitness — that
+  provides developer APIs for integrating workout tracking, route data, user profiles, heart rate zones, and fitness
+  devices into third-party applications.
 url: https://raw.githubusercontent.com/api-evangelist/under-armour/refs/heads/main/apis.yml
 type: Index
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
@@ -21,37 +22,27 @@ apis:
   - aid: under-armour:mapmyfitness-api
     name: MapMyFitness API
     tags:
-    - Fitness
-    - Workouts
-    - Routes
-    - Health
-    - Connected Fitness
-    - OAuth2
+      - Fitness
+      - Workouts
+      - Routes
+      - Health
+      - Connected Fitness
+      - OAuth2
     image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.ua.com
     humanURL: https://developer.mapmyfitness.com/
     properties:
-    - url: https://developer.mapmyfitness.com/docs/
-      type: Documentation
-    - url: https://developer.mapmyfitness.com/docs/v71_OAuth_2_Intro/
-      type: Authentication
-    - url: openapi/mapmyfitness-openapi.yml
-      type: OpenAPI
-    - type: NaftikoCapability
-      url: capabilities/mapmyfitness-devices.yaml
-    - type: NaftikoCapability
-      url: capabilities/mapmyfitness-heart-rate-zones.yaml
-    - type: NaftikoCapability
-      url: capabilities/mapmyfitness-routes.yaml
-    - type: NaftikoCapability
-      url: capabilities/mapmyfitness-users.yaml
-    - type: NaftikoCapability
-      url: capabilities/mapmyfitness-webhooks.yaml
-    - type: NaftikoCapability
-      url: capabilities/mapmyfitness-workouts.yaml
-    description: The MapMyFitness API (Under Armour Connected Fitness API) provides RESTful access to fitness data including
-      workouts, routes, user profiles, heart rate zones, fitness devices, and webhooks. The platform powers MapMyFitness, MapMyRun,
-      MapMyRide, and MapMyWalk and supports over 400 partner apps and devices. Authentication uses OAuth 2.0.
+      - url: https://developer.mapmyfitness.com/docs/
+        type: Documentation
+      - url: https://developer.mapmyfitness.com/docs/v71_OAuth_2_Intro/
+        type: Authentication
+      - url: openapi/mapmyfitness-openapi.yml
+        type: OpenAPI
+    description: >-
+      The MapMyFitness API (Under Armour Connected Fitness API) provides RESTful access to fitness data including
+      workouts, routes, user profiles, heart rate zones, fitness devices, and webhooks. The platform powers
+      MapMyFitness, MapMyRun, MapMyRide, and MapMyWalk and supports over 400 partner apps and devices. Authentication
+      uses OAuth 2.0.
 common:
   - type: LinkedIn
     url: https://www.linkedin.com/company/under-armour
