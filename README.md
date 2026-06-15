@@ -1,72 +1,70 @@
-# Under Armour
+# Under Armour (under-armour)
 
 Under Armour is an American company that manufactures footwear, sports, and casual apparel known for its performance products designed for athletes. Under Armour operates a Connected Fitness platform — powered by MapMyFitness — that provides developer APIs for integrating workout tracking, route data, user profiles, heart rate zones, and fitness devices into third-party applications.
 
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/under-armour/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/under-armour/refs/heads/main/apis.yml)
+
+## Scope
+
+- **Type:** Index
+
+## Tags
+
+- Fitness
+- Health
+- Wearables
+- Connected Fitness
+- Sports
+- Fortune 1000
+
+## Timestamps
+
+- **Created:** 2026-03-24
+- **Modified:** 2026-05-19
+
 ## APIs
 
-### MapMyFitness API (Under Armour Connected Fitness)
+### MapMyFitness API
 
-The MapMyFitness API provides RESTful access to fitness data including workouts, routes, user profiles, heart rate zones, fitness devices, and webhooks. The platform powers MapMyFitness, MapMyRun, MapMyRide, and MapMyWalk and supports over 400 partner apps and devices.
+The MapMyFitness API (Under Armour Connected Fitness API) provides RESTful access to fitness data including workouts, routes, user profiles, heart rate zones, fitness devices, and webhooks. The platform powers MapMyFitness, MapMyRun, MapMyRide, and MapMyWalk and supports over 400 partner apps and devices. Authentication uses OAuth 2.0.
 
-- **Base URL:** https://api.ua.com
-- **Developer Portal:** https://developer.mapmyfitness.com/
-- **Authentication:** OAuth 2.0
-- **OpenAPI:** [openapi/mapmyfitness-openapi.yml](openapi/mapmyfitness-openapi.yml)
+- **Human URL:** [https://developer.mapmyfitness.com/](https://developer.mapmyfitness.com/)
+- **Base URL:** `https://api.ua.com`
 
-## Artifacts
+#### Tags
 
-### OpenAPI Specs
+- Fitness
+- Workouts
+- Routes
+- Health
+- Connected Fitness
+- OAuth2
 
-| File | Description |
-|------|-------------|
-| [openapi/mapmyfitness-openapi.yml](openapi/mapmyfitness-openapi.yml) | MapMyFitness API v7.1 — workouts, routes, users, heart rate zones, devices, webhooks |
+#### Properties
 
-### Capabilities
-
-| File | Description |
-|------|-------------|
-| [capabilities/connected-fitness.yaml](capabilities/connected-fitness.yaml) | Workflow capability for Under Armour Connected Fitness (REST + MCP) |
-| [capabilities/shared/mapmyfitness.yaml](capabilities/shared/mapmyfitness.yaml) | Shared per-API definition for MapMyFitness API |
-
-### JSON Schema
-
-| File | Description |
-|------|-------------|
-| [json-schema/under-armour-workout-schema.json](json-schema/under-armour-workout-schema.json) | Schema for a MapMyFitness workout record with aggregates and time series |
-
-### JSON Structure
-
-| File | Description |
-|------|-------------|
-| [json-structure/under-armour-workout-structure.json](json-structure/under-armour-workout-structure.json) | Field-level documentation for the Workout entity |
-
-### JSON-LD
-
-| File | Description |
-|------|-------------|
-| [json-ld/under-armour-context.jsonld](json-ld/under-armour-context.jsonld) | JSON-LD context mapping fitness data to schema.org vocabulary |
-
-### Examples
-
-| File | Description |
-|------|-------------|
-| [examples/mapmyfitness-list-workouts-example.json](examples/mapmyfitness-list-workouts-example.json) | Example request/response for listing user workouts |
-
-### Spectral Rules
-
-| File | Description |
-|------|-------------|
-| [rules/under-armour-rules.yml](rules/under-armour-rules.yml) | Spectral ruleset enforcing Under Armour API conventions |
-
-### Vocabulary
-
-| File | Description |
-|------|-------------|
-| [vocabulary/under-armour-vocabulary.yml](vocabulary/under-armour-vocabulary.yml) | Domain vocabulary for Connected Fitness — workouts, routes, heart rate zones, devices |
-
-## Properties
-
-- [Website](https://www.under-armour.com)
-- [Developer Portal](https://developer.mapmyfitness.com/)
 - [Documentation](https://developer.mapmyfitness.com/docs/)
 - [Authentication](https://developer.mapmyfitness.com/docs/v71_OAuth_2_Intro/)
+- [OpenAPI](openapi/mapmyfitness-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/mapmyfitness.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/mapmyfitness.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+## Common Properties
+
+- [LinkedIn](https://www.linkedin.com/company/under-armour)
+- [Website](https://www.under-armour.com)
+- [Developer  Portal](https://developer.mapmyfitness.com/)
+- [Documentation](https://developer.mapmyfitness.com/docs/)
+- [Authentication](https://developer.mapmyfitness.com/docs/v71_OAuth_2_Intro/)
+- [Terms of Service](https://developer.mapmyfitness.com/Terms_Of_Service/)
+- [Git Hub  Org](https://github.com/underarmour)
+- [OpenAPI](openapi/mapmyfitness-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [JSON-LD](json-ld/under-armour-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+- [Vocabulary](vocabulary/under-armour-vocabulary.yml)
+- [Spectral  Rules](rules/under-armour-rules.yml)
+- [JSON Schema](json-schema/under-armour-workout-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [Capabilities](capabilities/connected-fitness.yaml)
+
+## Maintainers
+
+**FN:** Kin Lane
+**Email:** kin@apievangelist.com
