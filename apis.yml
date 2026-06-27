@@ -48,7 +48,7 @@ common:
     url: https://www.linkedin.com/company/under-armour
   - type: Website
     url: https://www.under-armour.com
-  - type: Developer Portal
+  - type: DeveloperPortal
     url: https://developer.mapmyfitness.com/
   - type: Documentation
     url: https://developer.mapmyfitness.com/docs/
@@ -56,7 +56,7 @@ common:
     url: https://developer.mapmyfitness.com/docs/v71_OAuth_2_Intro/
   - type: TermsOfService
     url: https://developer.mapmyfitness.com/Terms_Of_Service/
-  - type: GitHub Org
+  - type: GitHubOrg
     url: https://github.com/underarmour
   - type: OpenAPI
     url: openapi/mapmyfitness-openapi.yml
@@ -64,7 +64,7 @@ common:
     url: json-ld/under-armour-context.jsonld
   - type: Vocabulary
     url: vocabulary/under-armour-vocabulary.yml
-  - type: Spectral Rules
+  - type: SpectralRules
     url: rules/under-armour-rules.yml
   - type: JSONSchema
     url: json-schema/under-armour-workout-schema.json
