@@ -1,0 +1,25 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.under-armour.com
+  https: false
+- host: developer.mapmyfitness.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct  7 23:59:59 2026 GMT
+  hsts: false
+- host: api.ua.com
+  https: false
+domains:
+- domain: under-armour.com
+  dnssec: false
+  caa: []
+  spf: false
+  dmarc: false
+- domain: mapmyfitness.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

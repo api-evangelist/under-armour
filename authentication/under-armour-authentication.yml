@@ -1,0 +1,19 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/mapmyfitness-openapi.yml
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://www.mapmyfitness.com/v7.1/oauth2/authorize/
+    tokenUrl: https://api.ua.com/v7.1/oauth2/access_token/
+    scopes: 2
+  description: OAuth 2.0 authentication
+  sources:
+  - openapi/mapmyfitness-openapi.yml

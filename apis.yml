@@ -44,6 +44,8 @@ apis:
       MapMyFitness, MapMyRun, MapMyRide, and MapMyWalk and supports over 400 partner apps and devices. Authentication
       uses OAuth 2.0.
 common:
+  - type: DomainSecurity
+    url: security/under-armour-domain-security.yml
   - type: Authentication
     url: authentication/under-armour-authentication.yml
   - type: OAuthScopes
