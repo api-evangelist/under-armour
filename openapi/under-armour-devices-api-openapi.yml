@@ -1,0 +1,86 @@
+openapi: 3.0.3
+info:
+  title: MapMyFitness Devices API
+  description: The MapMyFitness API (Under Armour Connected Fitness API) provides RESTful access to fitness data including workouts, routes, user profiles, heart rate zones, fitness devices, and webhooks. The platform powers MapMyFitness, MapMyRun, MapMyRide, and MapMyWalk and supports over 400 partner apps and devices. Authentication uses OAuth 2.0.
+  version: 7.1.0
+  contact:
+    name: Under Armour Developer Support
+    url: https://developer.mapmyfitness.com/
+  termsOfService: https://developer.mapmyfitness.com/Terms_Of_Service/
+servers:
+- url: https://api.ua.com
+  description: Under Armour Connected Fitness API
+tags:
+- name: Devices
+  description: Fitness device registration and management
+paths:
+  /v7.1/device/:
+    get:
+      operationId: listDevices
+      summary: List Devices
+      description: Retrieves fitness devices registered to a user.
+      tags:
+      - Devices
+      parameters:
+      - name: user
+        in: query
+        required: true
+        description: User ID to retrieve devices for
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of registered fitness devices
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceCollection'
+        '401':
+          description: Authentication required
+      security:
+      - oauth2:
+        - read
+components:
+  schemas:
+    DeviceCollection:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            devices:
+              type: array
+              items:
+                $ref: '#/components/schemas/Device'
+    Device:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Device name
+        manufacturer:
+          type: string
+          description: Device manufacturer
+        model:
+          type: string
+          description: Device model
+        device_type:
+          type: string
+          description: Type of fitness device
+        created_datetime:
+          type: string
+          format: date-time
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.mapmyfitness.com/v7.1/oauth2/authorize/
+          tokenUrl: https://api.ua.com/v7.1/oauth2/access_token/
+          scopes:
+            read: Read access to fitness data
+            write: Write access to fitness data
+externalDocs:
+  description: MapMyFitness API Documentation
+  url: https://developer.mapmyfitness.com/docs/

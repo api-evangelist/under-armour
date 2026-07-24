@@ -1,0 +1,230 @@
+openapi: 3.0.3
+info:
+  title: MapMyFitness Devices Users API
+  description: The MapMyFitness API (Under Armour Connected Fitness API) provides RESTful access to fitness data including workouts, routes, user profiles, heart rate zones, fitness devices, and webhooks. The platform powers MapMyFitness, MapMyRun, MapMyRide, and MapMyWalk and supports over 400 partner apps and devices. Authentication uses OAuth 2.0.
+  version: 7.1.0
+  contact:
+    name: Under Armour Developer Support
+    url: https://developer.mapmyfitness.com/
+  termsOfService: https://developer.mapmyfitness.com/Terms_Of_Service/
+servers:
+- url: https://api.ua.com
+  description: Under Armour Connected Fitness API
+tags:
+- name: Users
+  description: User profile management and social connections
+paths:
+  /v7.1/user/self/:
+    get:
+      operationId: getCurrentUser
+      summary: Get Current User
+      description: Retrieves the profile of the currently authenticated user.
+      tags:
+      - Users
+      responses:
+        '200':
+          description: Current user profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Authentication required
+      security:
+      - oauth2:
+        - read
+  /v7.1/user/{id}/:
+    get:
+      operationId: getUser
+      summary: Get User
+      description: Retrieves a user profile by ID.
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: User ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Authentication required
+        '404':
+          description: User not found
+      security:
+      - oauth2:
+        - read
+    put:
+      operationId: updateUser
+      summary: Update User
+      description: Updates the authenticated user's profile.
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: User ID (must match authenticated user)
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Authentication required
+        '403':
+          description: Cannot update another user's profile
+      security:
+      - oauth2:
+        - write
+  /v7.1/user/:
+    get:
+      operationId: listUsers
+      summary: List Users
+      description: Search for users or retrieve social connections.
+      tags:
+      - Users
+      parameters:
+      - name: q
+        in: query
+        required: false
+        description: Search users by name or email
+        schema:
+          type: string
+      - name: friends_with
+        in: query
+        required: false
+        description: Get users that the specified user is friends with
+        schema:
+          type: string
+      - name: mutual_friends_for
+        in: query
+        required: false
+        description: Retrieve mutual friend relationships
+        schema:
+          type: string
+      - name: email
+        in: query
+        required: false
+        description: Search by email address
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of matching users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCollection'
+        '401':
+          description: Authentication required
+      security:
+      - oauth2:
+        - read
+components:
+  schemas:
+    UserUpdate:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        gender:
+          type: string
+        birthdate:
+          type: string
+          format: date
+        height:
+          type: number
+        weight:
+          type: number
+        time_zone:
+          type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: User ID
+        username:
+          type: string
+          description: Username
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        gender:
+          type: string
+        birthdate:
+          type: string
+          format: date
+        height:
+          type: number
+          description: User height
+        weight:
+          type: number
+          description: User weight
+        date_joined:
+          type: string
+          format: date-time
+        location:
+          type: string
+        time_zone:
+          type: string
+        preferred_language:
+          type: string
+        display_measurement_system:
+          type: string
+          enum:
+          - US
+          - METRIC
+    UserCollection:
+      type: object
+      properties:
+        total_count:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            users:
+              type: array
+              items:
+                $ref: '#/components/schemas/User'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.mapmyfitness.com/v7.1/oauth2/authorize/
+          tokenUrl: https://api.ua.com/v7.1/oauth2/access_token/
+          scopes:
+            read: Read access to fitness data
+            write: Write access to fitness data
+externalDocs:
+  description: MapMyFitness API Documentation
+  url: https://developer.mapmyfitness.com/docs/

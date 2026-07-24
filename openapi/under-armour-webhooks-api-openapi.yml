@@ -1,0 +1,143 @@
+openapi: 3.0.3
+info:
+  title: MapMyFitness Devices Webhooks API
+  description: The MapMyFitness API (Under Armour Connected Fitness API) provides RESTful access to fitness data including workouts, routes, user profiles, heart rate zones, fitness devices, and webhooks. The platform powers MapMyFitness, MapMyRun, MapMyRide, and MapMyWalk and supports over 400 partner apps and devices. Authentication uses OAuth 2.0.
+  version: 7.1.0
+  contact:
+    name: Under Armour Developer Support
+    url: https://developer.mapmyfitness.com/
+  termsOfService: https://developer.mapmyfitness.com/Terms_Of_Service/
+servers:
+- url: https://api.ua.com
+  description: Under Armour Connected Fitness API
+tags:
+- name: Webhooks
+  description: Event-driven webhook subscriptions
+paths:
+  /v7.1/webhook/:
+    get:
+      operationId: listWebhooks
+      summary: List Webhooks
+      description: Retrieves webhook subscriptions for the authenticated application.
+      tags:
+      - Webhooks
+      responses:
+        '200':
+          description: List of webhook subscriptions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookCollection'
+        '401':
+          description: Authentication required
+      security:
+      - oauth2:
+        - write
+    post:
+      operationId: createWebhook
+      summary: Create Webhook
+      description: Creates a new webhook subscription for fitness events.
+      tags:
+      - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookCreate'
+      responses:
+        '201':
+          description: Webhook created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Authentication required
+      security:
+      - oauth2:
+        - write
+  /v7.1/webhook/{id}/:
+    delete:
+      operationId: deleteWebhook
+      summary: Delete Webhook
+      description: Deletes a webhook subscription.
+      tags:
+      - Webhooks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Webhook ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Webhook deleted successfully
+        '401':
+          description: Authentication required
+        '404':
+          description: Webhook not found
+      security:
+      - oauth2:
+        - write
+components:
+  schemas:
+    WebhookCreate:
+      type: object
+      required:
+      - callback_url
+      - event_type
+      properties:
+        callback_url:
+          type: string
+          format: uri
+          description: URL to send webhook events to
+        event_type:
+          type: string
+          description: Event type — e.g., workout.create, workout.update, workout.delete
+        shared_secret:
+          type: string
+          description: Shared secret for HMAC verification
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Webhook ID
+        callback_url:
+          type: string
+          format: uri
+          description: URL to send webhook events to
+        event_type:
+          type: string
+          description: Event type to subscribe to
+        shared_secret:
+          type: string
+          description: Secret for verifying webhook payloads
+    WebhookCollection:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            webhooks:
+              type: array
+              items:
+                $ref: '#/components/schemas/Webhook'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.mapmyfitness.com/v7.1/oauth2/authorize/
+          tokenUrl: https://api.ua.com/v7.1/oauth2/access_token/
+          scopes:
+            read: Read access to fitness data
+            write: Write access to fitness data
+externalDocs:
+  description: MapMyFitness API Documentation
+  url: https://developer.mapmyfitness.com/docs/

@@ -1,0 +1,85 @@
+openapi: 3.0.3
+info:
+  title: MapMyFitness Devices Heart Rate Zones API
+  description: The MapMyFitness API (Under Armour Connected Fitness API) provides RESTful access to fitness data including workouts, routes, user profiles, heart rate zones, fitness devices, and webhooks. The platform powers MapMyFitness, MapMyRun, MapMyRide, and MapMyWalk and supports over 400 partner apps and devices. Authentication uses OAuth 2.0.
+  version: 7.1.0
+  contact:
+    name: Under Armour Developer Support
+    url: https://developer.mapmyfitness.com/
+  termsOfService: https://developer.mapmyfitness.com/Terms_Of_Service/
+servers:
+- url: https://api.ua.com
+  description: Under Armour Connected Fitness API
+tags:
+- name: Heart Rate Zones
+  description: Heart rate zone configuration and calculations
+paths:
+  /v7.1/heart_rate_zone/:
+    get:
+      operationId: listHeartRateZones
+      summary: List Heart Rate Zones
+      description: Retrieves heart rate zone configuration for a user.
+      tags:
+      - Heart Rate Zones
+      parameters:
+      - name: user
+        in: query
+        required: true
+        description: User ID to retrieve heart rate zones for
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Heart rate zone definitions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HeartRateZoneCollection'
+        '401':
+          description: Authentication required
+      security:
+      - oauth2:
+        - read
+components:
+  schemas:
+    HeartRateZone:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Zone name (e.g., Zone 1, Zone 2)
+        min_heartrate:
+          type: integer
+          description: Minimum heart rate for this zone in bpm
+        max_heartrate:
+          type: integer
+          description: Maximum heart rate for this zone in bpm
+        color:
+          type: string
+          description: Display color for the zone
+    HeartRateZoneCollection:
+      type: object
+      properties:
+        total_count:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            heart_rate_zones:
+              type: array
+              items:
+                $ref: '#/components/schemas/HeartRateZone'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.mapmyfitness.com/v7.1/oauth2/authorize/
+          tokenUrl: https://api.ua.com/v7.1/oauth2/access_token/
+          scopes:
+            read: Read access to fitness data
+            write: Write access to fitness data
+externalDocs:
+  description: MapMyFitness API Documentation
+  url: https://developer.mapmyfitness.com/docs/

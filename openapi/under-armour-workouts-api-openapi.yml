@@ -1,0 +1,341 @@
+openapi: 3.0.3
+info:
+  title: MapMyFitness Devices Workouts API
+  description: The MapMyFitness API (Under Armour Connected Fitness API) provides RESTful access to fitness data including workouts, routes, user profiles, heart rate zones, fitness devices, and webhooks. The platform powers MapMyFitness, MapMyRun, MapMyRide, and MapMyWalk and supports over 400 partner apps and devices. Authentication uses OAuth 2.0.
+  version: 7.1.0
+  contact:
+    name: Under Armour Developer Support
+    url: https://developer.mapmyfitness.com/
+  termsOfService: https://developer.mapmyfitness.com/Terms_Of_Service/
+servers:
+- url: https://api.ua.com
+  description: Under Armour Connected Fitness API
+tags:
+- name: Workouts
+  description: Create, retrieve, update, and delete fitness workouts
+paths:
+  /v7.1/workout/:
+    get:
+      operationId: listWorkouts
+      summary: List Workouts
+      description: Retrieves a paginated list of workouts for a user. Supports filtering by activity type, date range, and gear.
+      tags:
+      - Workouts
+      parameters:
+      - name: user
+        in: query
+        required: true
+        description: User resource href or ID to filter workouts by
+        schema:
+          type: string
+      - name: activity_type
+        in: query
+        required: false
+        description: Filter by activity type href or ID (supports multiple, comma-separated)
+        schema:
+          type: string
+      - name: updated_before
+        in: query
+        required: false
+        description: Filter workouts updated before this ISO 8601 datetime
+        schema:
+          type: string
+          format: date-time
+      - name: updated_after
+        in: query
+        required: false
+        description: Filter workouts updated after this ISO 8601 datetime
+        schema:
+          type: string
+          format: date-time
+      - name: created_before
+        in: query
+        required: false
+        description: Filter workouts created before this ISO 8601 datetime
+        schema:
+          type: string
+          format: date-time
+      - name: created_after
+        in: query
+        required: false
+        description: Filter workouts created after this ISO 8601 datetime
+        schema:
+          type: string
+          format: date-time
+      - name: started_before
+        in: query
+        required: false
+        description: Filter workouts started before this ISO 8601 datetime
+        schema:
+          type: string
+          format: date-time
+      - name: started_after
+        in: query
+        required: false
+        description: Filter workouts started after this ISO 8601 datetime
+        schema:
+          type: string
+          format: date-time
+      - name: order_by
+        in: query
+        required: false
+        description: Sort order — start_datetime or -start_datetime (descending)
+        schema:
+          type: string
+          enum:
+          - start_datetime
+          - -start_datetime
+      - name: limit
+        in: query
+        required: false
+        description: Number of results per page
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        required: false
+        description: Pagination offset
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Paginated list of workouts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkoutCollection'
+        '401':
+          description: Authentication required
+        '403':
+          description: Insufficient permissions
+      security:
+      - oauth2:
+        - read
+    post:
+      operationId: createWorkout
+      summary: Create Workout
+      description: Creates a new workout for the authenticated user.
+      tags:
+      - Workouts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkoutCreate'
+      responses:
+        '201':
+          description: Workout created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workout'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Authentication required
+      security:
+      - oauth2:
+        - write
+  /v7.1/workout/{id}/:
+    get:
+      operationId: getWorkout
+      summary: Get Workout
+      description: Retrieves a single workout by ID. Use field_set=time_series to include GPS and metric time series data.
+      tags:
+      - Workouts
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Workout ID
+        schema:
+          type: string
+      - name: field_set
+        in: query
+        required: false
+        description: Include additional data — use time_series for GPS/metric samples
+        schema:
+          type: string
+          enum:
+          - time_series
+      responses:
+        '200':
+          description: Workout details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workout'
+        '401':
+          description: Authentication required
+        '403':
+          description: Access denied — user does not own this workout
+        '404':
+          description: Workout not found
+      security:
+      - oauth2:
+        - read
+    put:
+      operationId: updateWorkout
+      summary: Update Workout
+      description: Updates an existing workout. User must own the workout.
+      tags:
+      - Workouts
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Workout ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkoutCreate'
+      responses:
+        '200':
+          description: Workout updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workout'
+        '401':
+          description: Authentication required
+        '403':
+          description: Access denied
+        '404':
+          description: Workout not found
+      security:
+      - oauth2:
+        - write
+    delete:
+      operationId: deleteWorkout
+      summary: Delete Workout
+      description: Deletes a workout. User must own the workout.
+      tags:
+      - Workouts
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Workout ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Workout deleted successfully
+        '401':
+          description: Authentication required
+        '403':
+          description: Access denied
+        '404':
+          description: Workout not found
+      security:
+      - oauth2:
+        - write
+components:
+  schemas:
+    WorkoutCollection:
+      type: object
+      properties:
+        total_count:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            workouts:
+              type: array
+              items:
+                $ref: '#/components/schemas/Workout'
+        _links:
+          type: object
+    WorkoutAggregates:
+      type: object
+      properties:
+        distance_total:
+          type: number
+          description: Total distance in meters
+        steps_total:
+          type: integer
+          description: Total step count
+        active_time_total:
+          type: number
+          description: Total active time in seconds
+        elapsed_time_total:
+          type: number
+          description: Total elapsed time in seconds
+        metabolic_energy_total:
+          type: number
+          description: Total energy expenditure in joules
+        speed_avg:
+          type: number
+          description: Average speed in meters/second
+        heartrate_avg:
+          type: number
+          description: Average heart rate in beats/minute
+        heartrate_max:
+          type: number
+          description: Maximum heart rate in beats/minute
+        heartrate_min:
+          type: number
+          description: Minimum heart rate in beats/minute
+    WorkoutCreate:
+      type: object
+      required:
+      - name
+      - start_datetime
+      - start_locale_timezone
+      - aggregates
+      properties:
+        name:
+          type: string
+          description: Workout title
+        start_datetime:
+          type: string
+          format: date-time
+          description: ISO 8601 start time
+        start_locale_timezone:
+          type: string
+          description: IANA timezone
+        aggregates:
+          $ref: '#/components/schemas/WorkoutAggregates'
+    Workout:
+      type: object
+      properties:
+        _links:
+          type: object
+          description: HATEOAS links to related resources
+        name:
+          type: string
+          description: Workout title
+        start_datetime:
+          type: string
+          format: date-time
+          description: ISO 8601 start time of the workout
+        start_locale_timezone:
+          type: string
+          description: IANA timezone of the workout location
+        aggregates:
+          $ref: '#/components/schemas/WorkoutAggregates'
+        activity_type:
+          type: object
+          description: Link to the activity type
+        source:
+          type: object
+          description: Data source information
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.mapmyfitness.com/v7.1/oauth2/authorize/
+          tokenUrl: https://api.ua.com/v7.1/oauth2/access_token/
+          scopes:
+            read: Read access to fitness data
+            write: Write access to fitness data
+externalDocs:
+  description: MapMyFitness API Documentation
+  url: https://developer.mapmyfitness.com/docs/

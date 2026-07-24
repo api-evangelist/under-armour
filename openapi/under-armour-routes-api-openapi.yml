@@ -1,0 +1,305 @@
+openapi: 3.0.3
+info:
+  title: MapMyFitness Devices Routes API
+  description: The MapMyFitness API (Under Armour Connected Fitness API) provides RESTful access to fitness data including workouts, routes, user profiles, heart rate zones, fitness devices, and webhooks. The platform powers MapMyFitness, MapMyRun, MapMyRide, and MapMyWalk and supports over 400 partner apps and devices. Authentication uses OAuth 2.0.
+  version: 7.1.0
+  contact:
+    name: Under Armour Developer Support
+    url: https://developer.mapmyfitness.com/
+  termsOfService: https://developer.mapmyfitness.com/Terms_Of_Service/
+servers:
+- url: https://api.ua.com
+  description: Under Armour Connected Fitness API
+tags:
+- name: Routes
+  description: Manage running, cycling, and other fitness routes
+paths:
+  /v7.1/route/:
+    get:
+      operationId: listRoutes
+      summary: List Routes
+      description: Retrieves routes for a user or near a geographic location. Supports filtering by distance, privacy, and location.
+      tags:
+      - Routes
+      parameters:
+      - name: user
+        in: query
+        required: false
+        description: User resource href or ID (required if close_to_location not specified)
+        schema:
+          type: string
+      - name: close_to_location
+        in: query
+        required: false
+        description: Lat,lng coordinate pair to find nearby routes (required if user not specified)
+        schema:
+          type: string
+      - name: search_radius
+        in: query
+        required: false
+        description: Search radius in meters (0-50000, default 5000). Used with close_to_location.
+        schema:
+          type: integer
+      - name: minimum_distance
+        in: query
+        required: false
+        description: Minimum route distance in meters
+        schema:
+          type: number
+      - name: maximum_distance
+        in: query
+        required: false
+        description: Maximum route distance in meters
+        schema:
+          type: number
+      - name: text_search
+        in: query
+        required: false
+        description: Search routes by name or description
+        schema:
+          type: string
+      - name: order_by
+        in: query
+        required: false
+        description: Sort field
+        schema:
+          type: string
+          enum:
+          - distance
+          - distance_from_point
+          - date_created
+          - date_updated
+          - text_match
+      - name: field_set
+        in: query
+        required: false
+        description: Field set level — default or detailed (includes GPS points and elevation)
+        schema:
+          type: string
+          enum:
+          - default
+          - detailed
+      responses:
+        '200':
+          description: Paginated list of routes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteCollection'
+        '401':
+          description: Authentication required
+      security:
+      - oauth2:
+        - read
+    post:
+      operationId: createRoute
+      summary: Create Route
+      description: Creates a new route.
+      tags:
+      - Routes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouteCreate'
+      responses:
+        '201':
+          description: Route created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Authentication required
+      security:
+      - oauth2:
+        - write
+  /v7.1/route/{id}/:
+    get:
+      operationId: getRoute
+      summary: Get Route
+      description: Retrieves a single route by ID. Use field_set=detailed to include GPS points and elevation data.
+      tags:
+      - Routes
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Route ID
+        schema:
+          type: string
+      - name: field_set
+        in: query
+        required: false
+        description: Field set — default or detailed
+        schema:
+          type: string
+          enum:
+          - default
+          - detailed
+      responses:
+        '200':
+          description: Route details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '401':
+          description: Authentication required
+        '404':
+          description: Route not found
+      security:
+      - oauth2:
+        - read
+    put:
+      operationId: updateRoute
+      summary: Update Route
+      description: Updates an existing route.
+      tags:
+      - Routes
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Route ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouteCreate'
+      responses:
+        '200':
+          description: Route updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '401':
+          description: Authentication required
+        '404':
+          description: Route not found
+      security:
+      - oauth2:
+        - write
+    delete:
+      operationId: deleteRoute
+      summary: Delete Route
+      description: Deletes a route.
+      tags:
+      - Routes
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Route ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Route deleted successfully
+        '401':
+          description: Authentication required
+        '404':
+          description: Route not found
+      security:
+      - oauth2:
+        - write
+components:
+  schemas:
+    Route:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Route name
+        description:
+          type: string
+          description: Route description
+        distance:
+          type: number
+          description: Route distance in meters
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        postal_code:
+          type: string
+        starting_location:
+          type: object
+          description: Starting GPS coordinates
+        created_datetime:
+          type: string
+          format: date-time
+        updated_datetime:
+          type: string
+          format: date-time
+        total_ascent:
+          type: number
+          description: Total elevation gain in meters (detailed field set)
+        total_descent:
+          type: number
+          description: Total elevation loss in meters (detailed field set)
+        min_elevation:
+          type: number
+          description: Minimum elevation in meters (detailed field set)
+        max_elevation:
+          type: number
+          description: Maximum elevation in meters (detailed field set)
+    RouteCollection:
+      type: object
+      properties:
+        total_count:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            routes:
+              type: array
+              items:
+                $ref: '#/components/schemas/Route'
+        _links:
+          type: object
+    RouteCreate:
+      type: object
+      required:
+      - name
+      - distance
+      properties:
+        name:
+          type: string
+          description: Route name
+        description:
+          type: string
+          description: Route description
+        distance:
+          type: number
+          description: Route distance in meters
+        points:
+          type: array
+          description: GPS waypoints as [lng, lat, elevation] arrays
+          items:
+            type: array
+            items:
+              type: number
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.mapmyfitness.com/v7.1/oauth2/authorize/
+          tokenUrl: https://api.ua.com/v7.1/oauth2/access_token/
+          scopes:
+            read: Read access to fitness data
+            write: Write access to fitness data
+externalDocs:
+  description: MapMyFitness API Documentation
+  url: https://developer.mapmyfitness.com/docs/
