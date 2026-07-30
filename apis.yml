@@ -7,7 +7,20 @@ description: >-
   devices into third-party applications.
 url: https://raw.githubusercontent.com/api-evangelist/under-armour/refs/heads/main/apis.yml
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/under-armour.png
 tags:
   - Fitness
   - Health
@@ -19,30 +32,90 @@ created: '2026-03-24'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: under-armour:mapmyfitness-api
-    name: MapMyFitness API
-    tags:
-      - Fitness
-      - Workouts
-      - Routes
-      - Health
-      - Connected Fitness
-      - OAuth2
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.ua.com
-    humanURL: https://developer.mapmyfitness.com/
-    properties:
-      - url: https://developer.mapmyfitness.com/docs/
-        type: Documentation
-      - url: https://developer.mapmyfitness.com/docs/v71_OAuth_2_Intro/
-        type: Authentication
-      - url: openapi/mapmyfitness-openapi.yml
-        type: OpenAPI
-    description: >-
-      The MapMyFitness API (Under Armour Connected Fitness API) provides RESTful access to fitness data including
-      workouts, routes, user profiles, heart rate zones, fitness devices, and webhooks. The platform powers
-      MapMyFitness, MapMyRun, MapMyRide, and MapMyWalk and supports over 400 partner apps and devices. Authentication
-      uses OAuth 2.0.
+- aid: under-armour:under-armour-devices-api
+  name: Under Armour Devices API
+  description: Fitness device registration and management
+  humanURL: https://developer.mapmyfitness.com/
+  baseURL: https://api.ua.com
+  tags:
+  - Devices
+  properties:
+  - type: OpenAPI
+    url: openapi/under-armour-devices-api-openapi.yml
+  - type: Documentation
+    url: https://developer.mapmyfitness.com/docs/
+  - type: Authentication
+    url: https://developer.mapmyfitness.com/docs/v71_OAuth_2_Intro/
+- aid: under-armour:under-armour-heart-rate-zones-api
+  name: Under Armour Heart Rate Zones API
+  description: Heart rate zone configuration and calculations
+  humanURL: https://developer.mapmyfitness.com/
+  baseURL: https://api.ua.com
+  tags:
+  - Heart Rate Zones
+  properties:
+  - type: OpenAPI
+    url: openapi/under-armour-heart-rate-zones-api-openapi.yml
+  - type: Documentation
+    url: https://developer.mapmyfitness.com/docs/
+  - type: Authentication
+    url: https://developer.mapmyfitness.com/docs/v71_OAuth_2_Intro/
+- aid: under-armour:under-armour-routes-api
+  name: Under Armour Routes API
+  description: Manage running, cycling, and other fitness routes
+  humanURL: https://developer.mapmyfitness.com/
+  baseURL: https://api.ua.com
+  tags:
+  - Routes
+  properties:
+  - type: OpenAPI
+    url: openapi/under-armour-routes-api-openapi.yml
+  - type: Documentation
+    url: https://developer.mapmyfitness.com/docs/
+  - type: Authentication
+    url: https://developer.mapmyfitness.com/docs/v71_OAuth_2_Intro/
+- aid: under-armour:under-armour-users-api
+  name: Under Armour Users API
+  description: User profile management and social connections
+  humanURL: https://developer.mapmyfitness.com/
+  baseURL: https://api.ua.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/under-armour-users-api-openapi.yml
+  - type: Documentation
+    url: https://developer.mapmyfitness.com/docs/
+  - type: Authentication
+    url: https://developer.mapmyfitness.com/docs/v71_OAuth_2_Intro/
+- aid: under-armour:under-armour-webhooks-api
+  name: Under Armour Webhooks API
+  description: Event-driven webhook subscriptions
+  humanURL: https://developer.mapmyfitness.com/
+  baseURL: https://api.ua.com
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/under-armour-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://developer.mapmyfitness.com/docs/
+  - type: Authentication
+    url: https://developer.mapmyfitness.com/docs/v71_OAuth_2_Intro/
+- aid: under-armour:under-armour-workouts-api
+  name: Under Armour Workouts API
+  description: Create, retrieve, update, and delete fitness workouts
+  humanURL: https://developer.mapmyfitness.com/
+  baseURL: https://api.ua.com
+  tags:
+  - Workouts
+  properties:
+  - type: OpenAPI
+    url: openapi/under-armour-workouts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.mapmyfitness.com/docs/
+  - type: Authentication
+    url: https://developer.mapmyfitness.com/docs/v71_OAuth_2_Intro/
 common:
   - type: AgenticAccess
     url: agentic-access/under-armour-agentic-access.yml
