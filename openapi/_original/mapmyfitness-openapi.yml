@@ -1,0 +1,1018 @@
+openapi: 3.0.3
+info:
+  title: MapMyFitness API
+  description: >-
+    The MapMyFitness API (Under Armour Connected Fitness API) provides RESTful
+    access to fitness data including workouts, routes, user profiles, heart rate
+    zones, fitness devices, and webhooks. The platform powers MapMyFitness,
+    MapMyRun, MapMyRide, and MapMyWalk and supports over 400 partner apps and
+    devices. Authentication uses OAuth 2.0.
+  version: 7.1.0
+  contact:
+    name: Under Armour Developer Support
+    url: https://developer.mapmyfitness.com/
+  termsOfService: https://developer.mapmyfitness.com/Terms_Of_Service/
+externalDocs:
+  description: MapMyFitness API Documentation
+  url: https://developer.mapmyfitness.com/docs/
+servers:
+  - url: https://api.ua.com
+    description: Under Armour Connected Fitness API
+tags:
+  - name: Workouts
+    description: Create, retrieve, update, and delete fitness workouts
+  - name: Routes
+    description: Manage running, cycling, and other fitness routes
+  - name: Users
+    description: User profile management and social connections
+  - name: Heart Rate Zones
+    description: Heart rate zone configuration and calculations
+  - name: Devices
+    description: Fitness device registration and management
+  - name: Webhooks
+    description: Event-driven webhook subscriptions
+  - name: Authentication
+    description: OAuth 2.0 grant management
+paths:
+  /v7.1/workout/:
+    get:
+      operationId: listWorkouts
+      summary: List Workouts
+      description: >-
+        Retrieves a paginated list of workouts for a user. Supports filtering
+        by activity type, date range, and gear.
+      tags:
+        - Workouts
+      parameters:
+        - name: user
+          in: query
+          required: true
+          description: User resource href or ID to filter workouts by
+          schema:
+            type: string
+        - name: activity_type
+          in: query
+          required: false
+          description: Filter by activity type href or ID (supports multiple, comma-separated)
+          schema:
+            type: string
+        - name: updated_before
+          in: query
+          required: false
+          description: Filter workouts updated before this ISO 8601 datetime
+          schema:
+            type: string
+            format: date-time
+        - name: updated_after
+          in: query
+          required: false
+          description: Filter workouts updated after this ISO 8601 datetime
+          schema:
+            type: string
+            format: date-time
+        - name: created_before
+          in: query
+          required: false
+          description: Filter workouts created before this ISO 8601 datetime
+          schema:
+            type: string
+            format: date-time
+        - name: created_after
+          in: query
+          required: false
+          description: Filter workouts created after this ISO 8601 datetime
+          schema:
+            type: string
+            format: date-time
+        - name: started_before
+          in: query
+          required: false
+          description: Filter workouts started before this ISO 8601 datetime
+          schema:
+            type: string
+            format: date-time
+        - name: started_after
+          in: query
+          required: false
+          description: Filter workouts started after this ISO 8601 datetime
+          schema:
+            type: string
+            format: date-time
+        - name: order_by
+          in: query
+          required: false
+          description: Sort order — start_datetime or -start_datetime (descending)
+          schema:
+            type: string
+            enum: [start_datetime, -start_datetime]
+        - name: limit
+          in: query
+          required: false
+          description: Number of results per page
+          schema:
+            type: integer
+        - name: offset
+          in: query
+          required: false
+          description: Pagination offset
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Paginated list of workouts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkoutCollection'
+        '401':
+          description: Authentication required
+        '403':
+          description: Insufficient permissions
+      security:
+        - oauth2: [read]
+    post:
+      operationId: createWorkout
+      summary: Create Workout
+      description: Creates a new workout for the authenticated user.
+      tags:
+        - Workouts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkoutCreate'
+      responses:
+        '201':
+          description: Workout created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workout'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Authentication required
+      security:
+        - oauth2: [write]
+  /v7.1/workout/{id}/:
+    get:
+      operationId: getWorkout
+      summary: Get Workout
+      description: Retrieves a single workout by ID. Use field_set=time_series to include GPS and metric time series data.
+      tags:
+        - Workouts
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Workout ID
+          schema:
+            type: string
+        - name: field_set
+          in: query
+          required: false
+          description: Include additional data — use time_series for GPS/metric samples
+          schema:
+            type: string
+            enum: [time_series]
+      responses:
+        '200':
+          description: Workout details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workout'
+        '401':
+          description: Authentication required
+        '403':
+          description: Access denied — user does not own this workout
+        '404':
+          description: Workout not found
+      security:
+        - oauth2: [read]
+    put:
+      operationId: updateWorkout
+      summary: Update Workout
+      description: Updates an existing workout. User must own the workout.
+      tags:
+        - Workouts
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Workout ID
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkoutCreate'
+      responses:
+        '200':
+          description: Workout updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workout'
+        '401':
+          description: Authentication required
+        '403':
+          description: Access denied
+        '404':
+          description: Workout not found
+      security:
+        - oauth2: [write]
+    delete:
+      operationId: deleteWorkout
+      summary: Delete Workout
+      description: Deletes a workout. User must own the workout.
+      tags:
+        - Workouts
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Workout ID
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Workout deleted successfully
+        '401':
+          description: Authentication required
+        '403':
+          description: Access denied
+        '404':
+          description: Workout not found
+      security:
+        - oauth2: [write]
+  /v7.1/route/:
+    get:
+      operationId: listRoutes
+      summary: List Routes
+      description: >-
+        Retrieves routes for a user or near a geographic location. Supports
+        filtering by distance, privacy, and location.
+      tags:
+        - Routes
+      parameters:
+        - name: user
+          in: query
+          required: false
+          description: User resource href or ID (required if close_to_location not specified)
+          schema:
+            type: string
+        - name: close_to_location
+          in: query
+          required: false
+          description: Lat,lng coordinate pair to find nearby routes (required if user not specified)
+          schema:
+            type: string
+        - name: search_radius
+          in: query
+          required: false
+          description: Search radius in meters (0-50000, default 5000). Used with close_to_location.
+          schema:
+            type: integer
+        - name: minimum_distance
+          in: query
+          required: false
+          description: Minimum route distance in meters
+          schema:
+            type: number
+        - name: maximum_distance
+          in: query
+          required: false
+          description: Maximum route distance in meters
+          schema:
+            type: number
+        - name: text_search
+          in: query
+          required: false
+          description: Search routes by name or description
+          schema:
+            type: string
+        - name: order_by
+          in: query
+          required: false
+          description: Sort field
+          schema:
+            type: string
+            enum: [distance, distance_from_point, date_created, date_updated, text_match]
+        - name: field_set
+          in: query
+          required: false
+          description: Field set level — default or detailed (includes GPS points and elevation)
+          schema:
+            type: string
+            enum: [default, detailed]
+      responses:
+        '200':
+          description: Paginated list of routes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteCollection'
+        '401':
+          description: Authentication required
+      security:
+        - oauth2: [read]
+    post:
+      operationId: createRoute
+      summary: Create Route
+      description: Creates a new route.
+      tags:
+        - Routes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouteCreate'
+      responses:
+        '201':
+          description: Route created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Authentication required
+      security:
+        - oauth2: [write]
+  /v7.1/route/{id}/:
+    get:
+      operationId: getRoute
+      summary: Get Route
+      description: Retrieves a single route by ID. Use field_set=detailed to include GPS points and elevation data.
+      tags:
+        - Routes
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Route ID
+          schema:
+            type: string
+        - name: field_set
+          in: query
+          required: false
+          description: Field set — default or detailed
+          schema:
+            type: string
+            enum: [default, detailed]
+      responses:
+        '200':
+          description: Route details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '401':
+          description: Authentication required
+        '404':
+          description: Route not found
+      security:
+        - oauth2: [read]
+    put:
+      operationId: updateRoute
+      summary: Update Route
+      description: Updates an existing route.
+      tags:
+        - Routes
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Route ID
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouteCreate'
+      responses:
+        '200':
+          description: Route updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '401':
+          description: Authentication required
+        '404':
+          description: Route not found
+      security:
+        - oauth2: [write]
+    delete:
+      operationId: deleteRoute
+      summary: Delete Route
+      description: Deletes a route.
+      tags:
+        - Routes
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Route ID
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Route deleted successfully
+        '401':
+          description: Authentication required
+        '404':
+          description: Route not found
+      security:
+        - oauth2: [write]
+  /v7.1/user/self/:
+    get:
+      operationId: getCurrentUser
+      summary: Get Current User
+      description: Retrieves the profile of the currently authenticated user.
+      tags:
+        - Users
+      responses:
+        '200':
+          description: Current user profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Authentication required
+      security:
+        - oauth2: [read]
+  /v7.1/user/{id}/:
+    get:
+      operationId: getUser
+      summary: Get User
+      description: Retrieves a user profile by ID.
+      tags:
+        - Users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: User ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Authentication required
+        '404':
+          description: User not found
+      security:
+        - oauth2: [read]
+    put:
+      operationId: updateUser
+      summary: Update User
+      description: Updates the authenticated user's profile.
+      tags:
+        - Users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: User ID (must match authenticated user)
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Authentication required
+        '403':
+          description: Cannot update another user's profile
+      security:
+        - oauth2: [write]
+  /v7.1/user/:
+    get:
+      operationId: listUsers
+      summary: List Users
+      description: Search for users or retrieve social connections.
+      tags:
+        - Users
+      parameters:
+        - name: q
+          in: query
+          required: false
+          description: Search users by name or email
+          schema:
+            type: string
+        - name: friends_with
+          in: query
+          required: false
+          description: Get users that the specified user is friends with
+          schema:
+            type: string
+        - name: mutual_friends_for
+          in: query
+          required: false
+          description: Retrieve mutual friend relationships
+          schema:
+            type: string
+        - name: email
+          in: query
+          required: false
+          description: Search by email address
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of matching users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCollection'
+        '401':
+          description: Authentication required
+      security:
+        - oauth2: [read]
+  /v7.1/heart_rate_zone/:
+    get:
+      operationId: listHeartRateZones
+      summary: List Heart Rate Zones
+      description: Retrieves heart rate zone configuration for a user.
+      tags:
+        - Heart Rate Zones
+      parameters:
+        - name: user
+          in: query
+          required: true
+          description: User ID to retrieve heart rate zones for
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Heart rate zone definitions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HeartRateZoneCollection'
+        '401':
+          description: Authentication required
+      security:
+        - oauth2: [read]
+  /v7.1/device/:
+    get:
+      operationId: listDevices
+      summary: List Devices
+      description: Retrieves fitness devices registered to a user.
+      tags:
+        - Devices
+      parameters:
+        - name: user
+          in: query
+          required: true
+          description: User ID to retrieve devices for
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of registered fitness devices
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceCollection'
+        '401':
+          description: Authentication required
+      security:
+        - oauth2: [read]
+  /v7.1/webhook/:
+    get:
+      operationId: listWebhooks
+      summary: List Webhooks
+      description: Retrieves webhook subscriptions for the authenticated application.
+      tags:
+        - Webhooks
+      responses:
+        '200':
+          description: List of webhook subscriptions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookCollection'
+        '401':
+          description: Authentication required
+      security:
+        - oauth2: [write]
+    post:
+      operationId: createWebhook
+      summary: Create Webhook
+      description: Creates a new webhook subscription for fitness events.
+      tags:
+        - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookCreate'
+      responses:
+        '201':
+          description: Webhook created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '400':
+          description: Invalid request body
+        '401':
+          description: Authentication required
+      security:
+        - oauth2: [write]
+  /v7.1/webhook/{id}/:
+    delete:
+      operationId: deleteWebhook
+      summary: Delete Webhook
+      description: Deletes a webhook subscription.
+      tags:
+        - Webhooks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Webhook ID
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Webhook deleted successfully
+        '401':
+          description: Authentication required
+        '404':
+          description: Webhook not found
+      security:
+        - oauth2: [write]
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.mapmyfitness.com/v7.1/oauth2/authorize/
+          tokenUrl: https://api.ua.com/v7.1/oauth2/access_token/
+          scopes:
+            read: Read access to fitness data
+            write: Write access to fitness data
+  schemas:
+    Workout:
+      type: object
+      properties:
+        _links:
+          type: object
+          description: HATEOAS links to related resources
+        name:
+          type: string
+          description: Workout title
+        start_datetime:
+          type: string
+          format: date-time
+          description: ISO 8601 start time of the workout
+        start_locale_timezone:
+          type: string
+          description: IANA timezone of the workout location
+        aggregates:
+          $ref: '#/components/schemas/WorkoutAggregates'
+        activity_type:
+          type: object
+          description: Link to the activity type
+        source:
+          type: object
+          description: Data source information
+    WorkoutCreate:
+      type: object
+      required:
+        - name
+        - start_datetime
+        - start_locale_timezone
+        - aggregates
+      properties:
+        name:
+          type: string
+          description: Workout title
+        start_datetime:
+          type: string
+          format: date-time
+          description: ISO 8601 start time
+        start_locale_timezone:
+          type: string
+          description: IANA timezone
+        aggregates:
+          $ref: '#/components/schemas/WorkoutAggregates'
+    WorkoutAggregates:
+      type: object
+      properties:
+        distance_total:
+          type: number
+          description: Total distance in meters
+        steps_total:
+          type: integer
+          description: Total step count
+        active_time_total:
+          type: number
+          description: Total active time in seconds
+        elapsed_time_total:
+          type: number
+          description: Total elapsed time in seconds
+        metabolic_energy_total:
+          type: number
+          description: Total energy expenditure in joules
+        speed_avg:
+          type: number
+          description: Average speed in meters/second
+        heartrate_avg:
+          type: number
+          description: Average heart rate in beats/minute
+        heartrate_max:
+          type: number
+          description: Maximum heart rate in beats/minute
+        heartrate_min:
+          type: number
+          description: Minimum heart rate in beats/minute
+    WorkoutCollection:
+      type: object
+      properties:
+        total_count:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            workouts:
+              type: array
+              items:
+                $ref: '#/components/schemas/Workout'
+        _links:
+          type: object
+    Route:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Route name
+        description:
+          type: string
+          description: Route description
+        distance:
+          type: number
+          description: Route distance in meters
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        postal_code:
+          type: string
+        starting_location:
+          type: object
+          description: Starting GPS coordinates
+        created_datetime:
+          type: string
+          format: date-time
+        updated_datetime:
+          type: string
+          format: date-time
+        total_ascent:
+          type: number
+          description: Total elevation gain in meters (detailed field set)
+        total_descent:
+          type: number
+          description: Total elevation loss in meters (detailed field set)
+        min_elevation:
+          type: number
+          description: Minimum elevation in meters (detailed field set)
+        max_elevation:
+          type: number
+          description: Maximum elevation in meters (detailed field set)
+    RouteCreate:
+      type: object
+      required:
+        - name
+        - distance
+      properties:
+        name:
+          type: string
+          description: Route name
+        description:
+          type: string
+          description: Route description
+        distance:
+          type: number
+          description: Route distance in meters
+        points:
+          type: array
+          description: GPS waypoints as [lng, lat, elevation] arrays
+          items:
+            type: array
+            items:
+              type: number
+    RouteCollection:
+      type: object
+      properties:
+        total_count:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            routes:
+              type: array
+              items:
+                $ref: '#/components/schemas/Route'
+        _links:
+          type: object
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: User ID
+        username:
+          type: string
+          description: Username
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        gender:
+          type: string
+        birthdate:
+          type: string
+          format: date
+        height:
+          type: number
+          description: User height
+        weight:
+          type: number
+          description: User weight
+        date_joined:
+          type: string
+          format: date-time
+        location:
+          type: string
+        time_zone:
+          type: string
+        preferred_language:
+          type: string
+        display_measurement_system:
+          type: string
+          enum: [US, METRIC]
+    UserUpdate:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        gender:
+          type: string
+        birthdate:
+          type: string
+          format: date
+        height:
+          type: number
+        weight:
+          type: number
+        time_zone:
+          type: string
+    UserCollection:
+      type: object
+      properties:
+        total_count:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            users:
+              type: array
+              items:
+                $ref: '#/components/schemas/User'
+    HeartRateZone:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Zone name (e.g., Zone 1, Zone 2)
+        min_heartrate:
+          type: integer
+          description: Minimum heart rate for this zone in bpm
+        max_heartrate:
+          type: integer
+          description: Maximum heart rate for this zone in bpm
+        color:
+          type: string
+          description: Display color for the zone
+    HeartRateZoneCollection:
+      type: object
+      properties:
+        total_count:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            heart_rate_zones:
+              type: array
+              items:
+                $ref: '#/components/schemas/HeartRateZone'
+    Device:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Device name
+        manufacturer:
+          type: string
+          description: Device manufacturer
+        model:
+          type: string
+          description: Device model
+        device_type:
+          type: string
+          description: Type of fitness device
+        created_datetime:
+          type: string
+          format: date-time
+    DeviceCollection:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            devices:
+              type: array
+              items:
+                $ref: '#/components/schemas/Device'
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Webhook ID
+        callback_url:
+          type: string
+          format: uri
+          description: URL to send webhook events to
+        event_type:
+          type: string
+          description: Event type to subscribe to
+        shared_secret:
+          type: string
+          description: Secret for verifying webhook payloads
+    WebhookCreate:
+      type: object
+      required:
+        - callback_url
+        - event_type
+      properties:
+        callback_url:
+          type: string
+          format: uri
+          description: URL to send webhook events to
+        event_type:
+          type: string
+          description: Event type — e.g., workout.create, workout.update, workout.delete
+        shared_secret:
+          type: string
+          description: Shared secret for HMAC verification
+    WebhookCollection:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            webhooks:
+              type: array
+              items:
+                $ref: '#/components/schemas/Webhook'

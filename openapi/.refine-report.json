@@ -1,0 +1,24 @@
+{
+  "provider": "under-armour",
+  "sources": [
+    "under-armour-devices-api-openapi.yml",
+    "under-armour-heart-rate-zones-api-openapi.yml",
+    "under-armour-routes-api-openapi.yml",
+    "under-armour-users-api-openapi.yml",
+    "under-armour-webhooks-api-openapi.yml",
+    "under-armour-workouts-api-openapi.yml"
+  ],
+  "outputs": [
+    "under-armour-devices-api-openapi.yml",
+    "under-armour-heart-rate-zones-api-openapi.yml",
+    "under-armour-routes-api-openapi.yml",
+    "under-armour-users-api-openapi.yml",
+    "under-armour-webhooks-api-openapi.yml",
+    "under-armour-workouts-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
