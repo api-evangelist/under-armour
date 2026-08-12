@@ -140,7 +140,7 @@ common:
   - type: GitHubOrg
     url: https://github.com/underarmour
   - type: OpenAPI
-    url: openapi/mapmyfitness-openapi.yml
+    url: openapi/_original/mapmyfitness-openapi.yml
   - type: JSONLD
     url: json-ld/under-armour-context.jsonld
   - type: Vocabulary
@@ -149,8 +149,6 @@ common:
     url: rules/under-armour-rules.yml
   - type: JSONSchema
     url: json-schema/under-armour-workout-schema.json
-  - type: Capabilities
-    url: capabilities/connected-fitness.yaml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
