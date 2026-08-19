@@ -30,7 +30,7 @@ tags:
   - Fortune 1000
 created: '2026-03-24'
 modified: '2026-05-19'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: under-armour:under-armour-devices-api
   name: Under Armour Devices API
