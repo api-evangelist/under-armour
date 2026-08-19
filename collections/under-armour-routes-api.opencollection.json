@@ -1,0 +1,211 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MapMyFitness Devices Routes API",
+    "version": "7.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Routes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Routes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ua.com/v7.1/route/",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "User resource href or ID (required if close_to_location not specified)"
+              },
+              {
+                "name": "close_to_location",
+                "value": "",
+                "type": "query",
+                "description": "Lat,lng coordinate pair to find nearby routes (required if user not specified)"
+              },
+              {
+                "name": "search_radius",
+                "value": "",
+                "type": "query",
+                "description": "Search radius in meters (0-50000, default 5000). Used with close_to_location."
+              },
+              {
+                "name": "minimum_distance",
+                "value": "",
+                "type": "query",
+                "description": "Minimum route distance in meters"
+              },
+              {
+                "name": "maximum_distance",
+                "value": "",
+                "type": "query",
+                "description": "Maximum route distance in meters"
+              },
+              {
+                "name": "text_search",
+                "value": "",
+                "type": "query",
+                "description": "Search routes by name or description"
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Sort field"
+              },
+              {
+                "name": "field_set",
+                "value": "",
+                "type": "query",
+                "description": "Field set level — default or detailed (includes GPS points and elevation)"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/",
+              "accessTokenUrl": "https://api.ua.com/v7.1/oauth2/access_token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieves routes for a user or near a geographic location. Supports filtering by distance, privacy, and location."
+        },
+        {
+          "info": {
+            "name": "Create Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ua.com/v7.1/route/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/",
+              "accessTokenUrl": "https://api.ua.com/v7.1/oauth2/access_token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Creates a new route."
+        },
+        {
+          "info": {
+            "name": "Get Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ua.com/v7.1/route/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Route ID"
+              },
+              {
+                "name": "field_set",
+                "value": "",
+                "type": "query",
+                "description": "Field set — default or detailed"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/",
+              "accessTokenUrl": "https://api.ua.com/v7.1/oauth2/access_token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieves a single route by ID. Use field_set=detailed to include GPS points and elevation data."
+        },
+        {
+          "info": {
+            "name": "Update Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ua.com/v7.1/route/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Route ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/",
+              "accessTokenUrl": "https://api.ua.com/v7.1/oauth2/access_token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Updates an existing route."
+        },
+        {
+          "info": {
+            "name": "Delete Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.ua.com/v7.1/route/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Route ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/",
+              "accessTokenUrl": "https://api.ua.com/v7.1/oauth2/access_token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Deletes a route."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

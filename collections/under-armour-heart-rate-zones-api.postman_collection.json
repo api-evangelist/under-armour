@@ -1,0 +1,192 @@
+{
+  "item": [
+    {
+      "id": "c64dac3a-ba4b-4e3d-90f8-01a175536c01",
+      "name": "Heart Rate Zones",
+      "description": {
+        "content": "Heart rate zone configuration and calculations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "60e81ef6-12f1-4782-b629-68b7885c926c",
+          "name": "List Heart Rate Zones",
+          "request": {
+            "name": "List Heart Rate Zones",
+            "description": {
+              "content": "Retrieves heart rate zone configuration for a user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v7.1",
+                "heart_rate_zone",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<string>",
+                  "description": "(Required) User ID to retrieve heart rate zones for"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.ua.com/v7.1/oauth2/access_token/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "13c6dfee-4039-40af-b61b-5ae387b7b9f9",
+              "name": "Heart rate zone definitions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "heart_rate_zone",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total_count\": 3390,\n  \"_embedded\": {\n    \"heart_rate_zones\": [\n      {\n        \"name\": \"string\",\n        \"min_heartrate\": 2028,\n        \"max_heartrate\": 2454,\n        \"color\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"min_heartrate\": 6972,\n        \"max_heartrate\": 8957,\n        \"color\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbb4be5b-8a89-4096-9322-56ad202e2333",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "heart_rate_zone",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ua.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a2e2d327-0614-4563-bfc0-f3ec926bf22f",
+    "name": "MapMyFitness Devices Heart Rate Zones API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MapMyFitness API (Under Armour Connected Fitness API) provides RESTful access to fitness data including workouts, routes, user profiles, heart rate zones, fitness devices, and webhooks. The platform powers MapMyFitness, MapMyRun, MapMyRide, and MapMyWalk and supports over 400 partner apps and devices. Authentication uses OAuth 2.0.\n\nContact Support:\n Name: Under Armour Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1220 @@
+{
+  "item": [
+    {
+      "id": "86730225-95bb-4f27-a17d-bafe8f6b6fa6",
+      "name": "Routes",
+      "description": {
+        "content": "Manage running, cycling, and other fitness routes",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f2a72365-ede7-4bfd-8ffc-d821c7f92849",
+          "name": "List Routes",
+          "request": {
+            "name": "List Routes",
+            "description": {
+              "content": "Retrieves routes for a user or near a geographic location. Supports filtering by distance, privacy, and location.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v7.1",
+                "route",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<string>",
+                  "description": "User resource href or ID (required if close_to_location not specified)"
+                },
+                {
+                  "disabled": false,
+                  "key": "close_to_location",
+                  "value": "<string>",
+                  "description": "Lat,lng coordinate pair to find nearby routes (required if user not specified)"
+                },
+                {
+                  "disabled": false,
+                  "key": "search_radius",
+                  "value": "<integer>",
+                  "description": "Search radius in meters (0-50000, default 5000). Used with close_to_location."
+                },
+                {
+                  "disabled": false,
+                  "key": "minimum_distance",
+                  "value": "<number>",
+                  "description": "Minimum route distance in meters"
+                },
+                {
+                  "disabled": false,
+                  "key": "maximum_distance",
+                  "value": "<number>",
+                  "description": "Maximum route distance in meters"
+                },
+                {
+                  "disabled": false,
+                  "key": "text_search",
+                  "value": "<string>",
+                  "description": "Search routes by name or description"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Sort field"
+                },
+                {
+                  "disabled": false,
+                  "key": "field_set",
+                  "value": "<string>",
+                  "description": "Field set level — default or detailed (includes GPS points and elevation)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.ua.com/v7.1/oauth2/access_token/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "21b3edf8-ee05-48b1-bb57-7763eca200e3",
+              "name": "Paginated list of routes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "route",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "close_to_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_radius",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "minimum_distance",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "maximum_distance",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "text_search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field_set",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total_count\": 8953,\n  \"_embedded\": {\n    \"routes\": [\n      {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"distance\": 6303.6622828241525,\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"country\": \"string\",\n        \"postal_code\": \"string\",\n        \"starting_location\": {},\n        \"created_datetime\": \"1964-08-04T04:49:47.384Z\",\n        \"updated_datetime\": \"2012-04-08T17:33:18.557Z\",\n        \"total_ascent\": 4881.2055115056955,\n        \"total_descent\": 9769.102315885739,\n        \"min_elevation\": 9625.719662423873,\n        \"max_elevation\": 1825.8159168005106\n      },\n      {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"distance\": 3021.9393179122444,\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"country\": \"string\",\n        \"postal_code\": \"string\",\n        \"starting_location\": {},\n        \"created_datetime\": \"1990-07-06T17:38:07.853Z\",\n        \"updated_datetime\": \"1964-09-29T13:00:01.755Z\",\n        \"total_ascent\": 8560.28902748279,\n        \"total_descent\": 2774.7149017715446,\n        \"min_elevation\": 9265.142362934032,\n        \"max_elevation\": 6484.578772522614\n      }\n    ]\n  },\n  \"_links\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "877d78d7-5407-4a61-a72c-877ecbf502b9",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "route",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "close_to_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_radius",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "minimum_distance",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "maximum_distance",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "text_search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field_set",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80dffd07-5189-4a6e-a0dc-2a90c8b207e9",
+          "name": "Create Route",
+          "request": {
+            "name": "Create Route",
+            "description": {
+              "content": "Creates a new route.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v7.1",
+                "route",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.ua.com/v7.1/oauth2/access_token/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"distance\": \"<number>\",\n  \"description\": \"<string>\",\n  \"points\": [\n    [\n      \"<number>\",\n      \"<number>\"\n    ],\n    [\n      \"<number>\",\n      \"<number>\"\n    ]\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d2fba4b7-674d-444b-9d40-34a641b0263b",
+              "name": "Route created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "route",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"distance\": \"<number>\",\n  \"description\": \"<string>\",\n  \"points\": [\n    [\n      \"<number>\",\n      \"<number>\"\n    ],\n    [\n      \"<number>\",\n      \"<number>\"\n    ]\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"distance\": 7481.209662872359,\n  \"city\": \"string\",\n  \"state\": \"string\",\n  \"country\": \"string\",\n  \"postal_code\": \"string\",\n  \"starting_location\": {},\n  \"created_datetime\": \"1987-01-21T01:41:17.877Z\",\n  \"updated_datetime\": \"1964-11-14T17:26:53.844Z\",\n  \"total_ascent\": 5560.585612535542,\n  \"total_descent\": 9735.623661778816,\n  \"min_elevation\": 5468.66123843866,\n  \"max_elevation\": 8365.718664970778\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a63e761a-d724-40f4-936f-c4f0b9e54e53",
+              "name": "Invalid request body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "route",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"distance\": \"<number>\",\n  \"description\": \"<string>\",\n  \"points\": [\n    [\n      \"<number>\",\n      \"<number>\"\n    ],\n    [\n      \"<number>\",\n      \"<number>\"\n    ]\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "57e030fa-93d2-4466-963e-da5e4295f369",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "route",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"distance\": \"<number>\",\n  \"description\": \"<string>\",\n  \"points\": [\n    [\n      \"<number>\",\n      \"<number>\"\n    ],\n    [\n      \"<number>\",\n      \"<number>\"\n    ]\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee5b5fc8-fee7-4957-b067-3413cc6ac206",
+          "name": "Get Route",
+          "request": {
+            "name": "Get Route",
+            "description": {
+              "content": "Retrieves a single route by ID. Use field_set=detailed to include GPS points and elevation data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v7.1",
+                "route",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "field_set",
+                  "value": "<string>",
+                  "description": "Field set — default or detailed"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Route ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.ua.com/v7.1/oauth2/access_token/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6268aae3-67ef-4f2e-9949-c9918ea17cb2",
+              "name": "Route details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "route",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "field_set",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Route ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"distance\": 7481.209662872359,\n  \"city\": \"string\",\n  \"state\": \"string\",\n  \"country\": \"string\",\n  \"postal_code\": \"string\",\n  \"starting_location\": {},\n  \"created_datetime\": \"1987-01-21T01:41:17.877Z\",\n  \"updated_datetime\": \"1964-11-14T17:26:53.844Z\",\n  \"total_ascent\": 5560.585612535542,\n  \"total_descent\": 9735.623661778816,\n  \"min_elevation\": 5468.66123843866,\n  \"max_elevation\": 8365.718664970778\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ba4b849-186e-4a1e-a0bc-7079fade119b",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "route",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "field_set",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Route ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ab775609-e64f-40e8-b31e-30a8dac9c368",
+              "name": "Route not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "route",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "field_set",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Route ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ae2363a-7a63-4c51-b823-fae3bed32c84",
+          "name": "Update Route",
+          "request": {
+            "name": "Update Route",
+            "description": {
+              "content": "Updates an existing route.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v7.1",
+                "route",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Route ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.ua.com/v7.1/oauth2/access_token/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"distance\": \"<number>\",\n  \"description\": \"<string>\",\n  \"points\": [\n    [\n      \"<number>\",\n      \"<number>\"\n    ],\n    [\n      \"<number>\",\n      \"<number>\"\n    ]\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3934ce90-df90-4446-8373-9100e6767d96",
+              "name": "Route updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "route",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Route ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"distance\": \"<number>\",\n  \"description\": \"<string>\",\n  \"points\": [\n    [\n      \"<number>\",\n      \"<number>\"\n    ],\n    [\n      \"<number>\",\n      \"<number>\"\n    ]\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"distance\": 7481.209662872359,\n  \"city\": \"string\",\n  \"state\": \"string\",\n  \"country\": \"string\",\n  \"postal_code\": \"string\",\n  \"starting_location\": {},\n  \"created_datetime\": \"1987-01-21T01:41:17.877Z\",\n  \"updated_datetime\": \"1964-11-14T17:26:53.844Z\",\n  \"total_ascent\": 5560.585612535542,\n  \"total_descent\": 9735.623661778816,\n  \"min_elevation\": 5468.66123843866,\n  \"max_elevation\": 8365.718664970778\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33a90462-8e98-4a12-91ae-0052ad98a435",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "route",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Route ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"distance\": \"<number>\",\n  \"description\": \"<string>\",\n  \"points\": [\n    [\n      \"<number>\",\n      \"<number>\"\n    ],\n    [\n      \"<number>\",\n      \"<number>\"\n    ]\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b879f97f-c230-4fdd-bf70-7ff4a867438c",
+              "name": "Route not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "route",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Route ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"distance\": \"<number>\",\n  \"description\": \"<string>\",\n  \"points\": [\n    [\n      \"<number>\",\n      \"<number>\"\n    ],\n    [\n      \"<number>\",\n      \"<number>\"\n    ]\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32d02d12-578c-4db6-a2c8-688014abe007",
+          "name": "Delete Route",
+          "request": {
+            "name": "Delete Route",
+            "description": {
+              "content": "Deletes a route.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v7.1",
+                "route",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Route ID"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.ua.com/v7.1/oauth2/access_token/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "57f35f0f-450f-4dcb-bbf8-5025335b09f4",
+              "name": "Route deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "route",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Route ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8f3f49d3-7432-4134-9cbd-226897e9e390",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "route",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Route ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8009c3cf-79dd-4514-a66a-7d92ef898ff9",
+              "name": "Route not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "route",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Route ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ua.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "dbada043-dca7-4cc4-a615-185c1bd108fe",
+    "name": "MapMyFitness Devices Routes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MapMyFitness API (Under Armour Connected Fitness API) provides RESTful access to fitness data including workouts, routes, user profiles, heart rate zones, fitness devices, and webhooks. The platform powers MapMyFitness, MapMyRun, MapMyRide, and MapMyWalk and supports over 400 partner apps and devices. Authentication uses OAuth 2.0.\n\nContact Support:\n Name: Under Armour Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

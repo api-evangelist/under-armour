@@ -1,0 +1,1511 @@
+{
+  "item": [
+    {
+      "id": "a94a086b-691b-41ea-8548-9f5eea01df3f",
+      "name": "Workouts",
+      "description": {
+        "content": "Create, retrieve, update, and delete fitness workouts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9d0783b0-fa62-4bff-aa6c-a6513dbc51b9",
+          "name": "List Workouts",
+          "request": {
+            "name": "List Workouts",
+            "description": {
+              "content": "Retrieves a paginated list of workouts for a user. Supports filtering by activity type, date range, and gear.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v7.1",
+                "workout",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<string>",
+                  "description": "(Required) User resource href or ID to filter workouts by"
+                },
+                {
+                  "disabled": false,
+                  "key": "activity_type",
+                  "value": "<string>",
+                  "description": "Filter by activity type href or ID (supports multiple, comma-separated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_before",
+                  "value": "<dateTime>",
+                  "description": "Filter workouts updated before this ISO 8601 datetime"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_after",
+                  "value": "<dateTime>",
+                  "description": "Filter workouts updated after this ISO 8601 datetime"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_before",
+                  "value": "<dateTime>",
+                  "description": "Filter workouts created before this ISO 8601 datetime"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_after",
+                  "value": "<dateTime>",
+                  "description": "Filter workouts created after this ISO 8601 datetime"
+                },
+                {
+                  "disabled": false,
+                  "key": "started_before",
+                  "value": "<dateTime>",
+                  "description": "Filter workouts started before this ISO 8601 datetime"
+                },
+                {
+                  "disabled": false,
+                  "key": "started_after",
+                  "value": "<dateTime>",
+                  "description": "Filter workouts started after this ISO 8601 datetime"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Sort order — start_datetime or -start_datetime (descending)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Pagination offset"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.ua.com/v7.1/oauth2/access_token/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9389c762-f9b5-4a18-be86-b99460d578ce",
+              "name": "Paginated list of workouts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "workout",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "activity_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "started_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "started_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total_count\": 2680,\n  \"_embedded\": {\n    \"workouts\": [\n      {\n        \"_links\": {},\n        \"name\": \"string\",\n        \"start_datetime\": \"1959-11-22T09:16:28.635Z\",\n        \"start_locale_timezone\": \"string\",\n        \"aggregates\": {\n          \"distance_total\": 553.3571955192707,\n          \"steps_total\": 1475,\n          \"active_time_total\": 7932.666070173572,\n          \"elapsed_time_total\": 4997.6859809323205,\n          \"metabolic_energy_total\": 8356.40682990268,\n          \"speed_avg\": 1418.852441812658,\n          \"heartrate_avg\": 1549.9987530866565,\n          \"heartrate_max\": 1805.930074688168,\n          \"heartrate_min\": 5451.106432135517\n        },\n        \"activity_type\": {},\n        \"source\": {}\n      },\n      {\n        \"_links\": {},\n        \"name\": \"string\",\n        \"start_datetime\": \"1964-09-10T08:18:18.800Z\",\n        \"start_locale_timezone\": \"string\",\n        \"aggregates\": {\n          \"distance_total\": 2245.2577174640655,\n          \"steps_total\": 3516,\n          \"active_time_total\": 1857.1045272387776,\n          \"elapsed_time_total\": 9286.797762028214,\n          \"metabolic_energy_total\": 8725.287626636678,\n          \"speed_avg\": 6458.59246634246,\n          \"heartrate_avg\": 7353.419609070061,\n          \"heartrate_max\": 3892.608126667342,\n          \"heartrate_min\": 8033.0466436053475\n        },\n        \"activity_type\": {},\n        \"source\": {}\n      }\n    ]\n  },\n  \"_links\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "015b0ba6-1218-4ffd-8a6f-10a0202bf69d",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "workout",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "activity_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "started_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "started_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1e17ea4f-81e6-40da-bf59-ae0286ec46b9",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "workout",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "activity_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "started_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "started_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "45afa667-5f67-49ce-a82e-7c5494147057",
+          "name": "Create Workout",
+          "request": {
+            "name": "Create Workout",
+            "description": {
+              "content": "Creates a new workout for the authenticated user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v7.1",
+                "workout",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.ua.com/v7.1/oauth2/access_token/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"start_datetime\": \"<dateTime>\",\n  \"start_locale_timezone\": \"<string>\",\n  \"aggregates\": {\n    \"distance_total\": \"<number>\",\n    \"steps_total\": \"<integer>\",\n    \"active_time_total\": \"<number>\",\n    \"elapsed_time_total\": \"<number>\",\n    \"metabolic_energy_total\": \"<number>\",\n    \"speed_avg\": \"<number>\",\n    \"heartrate_avg\": \"<number>\",\n    \"heartrate_max\": \"<number>\",\n    \"heartrate_min\": \"<number>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "207dc007-c9b7-42ab-b6c5-0280aa1fb73b",
+              "name": "Workout created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "workout",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"start_datetime\": \"<dateTime>\",\n  \"start_locale_timezone\": \"<string>\",\n  \"aggregates\": {\n    \"distance_total\": \"<number>\",\n    \"steps_total\": \"<integer>\",\n    \"active_time_total\": \"<number>\",\n    \"elapsed_time_total\": \"<number>\",\n    \"metabolic_energy_total\": \"<number>\",\n    \"speed_avg\": \"<number>\",\n    \"heartrate_avg\": \"<number>\",\n    \"heartrate_max\": \"<number>\",\n    \"heartrate_min\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_links\": {},\n  \"name\": \"string\",\n  \"start_datetime\": \"1967-09-26T18:49:24.365Z\",\n  \"start_locale_timezone\": \"string\",\n  \"aggregates\": {\n    \"distance_total\": \"<number>\",\n    \"steps_total\": \"<integer>\",\n    \"active_time_total\": \"<number>\",\n    \"elapsed_time_total\": \"<number>\",\n    \"metabolic_energy_total\": \"<number>\",\n    \"speed_avg\": \"<number>\",\n    \"heartrate_avg\": \"<number>\",\n    \"heartrate_max\": \"<number>\",\n    \"heartrate_min\": \"<number>\"\n  },\n  \"activity_type\": {},\n  \"source\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "532b6456-59e9-4cc7-accc-db0818367aea",
+              "name": "Invalid request body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "workout",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"start_datetime\": \"<dateTime>\",\n  \"start_locale_timezone\": \"<string>\",\n  \"aggregates\": {\n    \"distance_total\": \"<number>\",\n    \"steps_total\": \"<integer>\",\n    \"active_time_total\": \"<number>\",\n    \"elapsed_time_total\": \"<number>\",\n    \"metabolic_energy_total\": \"<number>\",\n    \"speed_avg\": \"<number>\",\n    \"heartrate_avg\": \"<number>\",\n    \"heartrate_max\": \"<number>\",\n    \"heartrate_min\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "98c892d7-7910-4eeb-ad2f-ad1464d38d9f",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "workout",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"start_datetime\": \"<dateTime>\",\n  \"start_locale_timezone\": \"<string>\",\n  \"aggregates\": {\n    \"distance_total\": \"<number>\",\n    \"steps_total\": \"<integer>\",\n    \"active_time_total\": \"<number>\",\n    \"elapsed_time_total\": \"<number>\",\n    \"metabolic_energy_total\": \"<number>\",\n    \"speed_avg\": \"<number>\",\n    \"heartrate_avg\": \"<number>\",\n    \"heartrate_max\": \"<number>\",\n    \"heartrate_min\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "744ddfd9-37d5-46a7-a737-3e09e1f4f408",
+          "name": "Get Workout",
+          "request": {
+            "name": "Get Workout",
+            "description": {
+              "content": "Retrieves a single workout by ID. Use field_set=time_series to include GPS and metric time series data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v7.1",
+                "workout",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "field_set",
+                  "value": "<string>",
+                  "description": "Include additional data — use time_series for GPS/metric samples"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Workout ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.ua.com/v7.1/oauth2/access_token/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0e58fc76-7e19-45dd-b56b-cf5edf357bf7",
+              "name": "Workout details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "workout",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "field_set",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Workout ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_links\": {},\n  \"name\": \"string\",\n  \"start_datetime\": \"1967-09-26T18:49:24.365Z\",\n  \"start_locale_timezone\": \"string\",\n  \"aggregates\": {\n    \"distance_total\": \"<number>\",\n    \"steps_total\": \"<integer>\",\n    \"active_time_total\": \"<number>\",\n    \"elapsed_time_total\": \"<number>\",\n    \"metabolic_energy_total\": \"<number>\",\n    \"speed_avg\": \"<number>\",\n    \"heartrate_avg\": \"<number>\",\n    \"heartrate_max\": \"<number>\",\n    \"heartrate_min\": \"<number>\"\n  },\n  \"activity_type\": {},\n  \"source\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7511091b-7377-47aa-88ac-e7b6925e2754",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "workout",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "field_set",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Workout ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "13577dcd-e1c5-4a73-888e-48fe99e37840",
+              "name": "Access denied — user does not own this workout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "workout",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "field_set",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Workout ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5abcc556-300f-4732-a727-0edc779db8f7",
+              "name": "Workout not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "workout",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "field_set",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Workout ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d5460bbc-3e4f-4675-b630-12bc07b7cc32",
+          "name": "Update Workout",
+          "request": {
+            "name": "Update Workout",
+            "description": {
+              "content": "Updates an existing workout. User must own the workout.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v7.1",
+                "workout",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Workout ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.ua.com/v7.1/oauth2/access_token/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"start_datetime\": \"<dateTime>\",\n  \"start_locale_timezone\": \"<string>\",\n  \"aggregates\": {\n    \"distance_total\": \"<number>\",\n    \"steps_total\": \"<integer>\",\n    \"active_time_total\": \"<number>\",\n    \"elapsed_time_total\": \"<number>\",\n    \"metabolic_energy_total\": \"<number>\",\n    \"speed_avg\": \"<number>\",\n    \"heartrate_avg\": \"<number>\",\n    \"heartrate_max\": \"<number>\",\n    \"heartrate_min\": \"<number>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "79af5915-6d3e-49e8-84ea-f260e72eb968",
+              "name": "Workout updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "workout",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Workout ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"start_datetime\": \"<dateTime>\",\n  \"start_locale_timezone\": \"<string>\",\n  \"aggregates\": {\n    \"distance_total\": \"<number>\",\n    \"steps_total\": \"<integer>\",\n    \"active_time_total\": \"<number>\",\n    \"elapsed_time_total\": \"<number>\",\n    \"metabolic_energy_total\": \"<number>\",\n    \"speed_avg\": \"<number>\",\n    \"heartrate_avg\": \"<number>\",\n    \"heartrate_max\": \"<number>\",\n    \"heartrate_min\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_links\": {},\n  \"name\": \"string\",\n  \"start_datetime\": \"1967-09-26T18:49:24.365Z\",\n  \"start_locale_timezone\": \"string\",\n  \"aggregates\": {\n    \"distance_total\": \"<number>\",\n    \"steps_total\": \"<integer>\",\n    \"active_time_total\": \"<number>\",\n    \"elapsed_time_total\": \"<number>\",\n    \"metabolic_energy_total\": \"<number>\",\n    \"speed_avg\": \"<number>\",\n    \"heartrate_avg\": \"<number>\",\n    \"heartrate_max\": \"<number>\",\n    \"heartrate_min\": \"<number>\"\n  },\n  \"activity_type\": {},\n  \"source\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14b38856-d9b7-46fc-8284-6ee6fb50cfd6",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "workout",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Workout ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"start_datetime\": \"<dateTime>\",\n  \"start_locale_timezone\": \"<string>\",\n  \"aggregates\": {\n    \"distance_total\": \"<number>\",\n    \"steps_total\": \"<integer>\",\n    \"active_time_total\": \"<number>\",\n    \"elapsed_time_total\": \"<number>\",\n    \"metabolic_energy_total\": \"<number>\",\n    \"speed_avg\": \"<number>\",\n    \"heartrate_avg\": \"<number>\",\n    \"heartrate_max\": \"<number>\",\n    \"heartrate_min\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "28871e01-cc17-4ede-ba54-2ab9c6afc187",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "workout",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Workout ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"start_datetime\": \"<dateTime>\",\n  \"start_locale_timezone\": \"<string>\",\n  \"aggregates\": {\n    \"distance_total\": \"<number>\",\n    \"steps_total\": \"<integer>\",\n    \"active_time_total\": \"<number>\",\n    \"elapsed_time_total\": \"<number>\",\n    \"metabolic_energy_total\": \"<number>\",\n    \"speed_avg\": \"<number>\",\n    \"heartrate_avg\": \"<number>\",\n    \"heartrate_max\": \"<number>\",\n    \"heartrate_min\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "66159be4-03a0-48fa-b14c-7e12a2e4381f",
+              "name": "Workout not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "workout",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Workout ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"start_datetime\": \"<dateTime>\",\n  \"start_locale_timezone\": \"<string>\",\n  \"aggregates\": {\n    \"distance_total\": \"<number>\",\n    \"steps_total\": \"<integer>\",\n    \"active_time_total\": \"<number>\",\n    \"elapsed_time_total\": \"<number>\",\n    \"metabolic_energy_total\": \"<number>\",\n    \"speed_avg\": \"<number>\",\n    \"heartrate_avg\": \"<number>\",\n    \"heartrate_max\": \"<number>\",\n    \"heartrate_min\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7366a9ca-9a97-46a5-ad46-121154b1a150",
+          "name": "Delete Workout",
+          "request": {
+            "name": "Delete Workout",
+            "description": {
+              "content": "Deletes a workout. User must own the workout.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v7.1",
+                "workout",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Workout ID"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.ua.com/v7.1/oauth2/access_token/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4fdfc1e7-a0fd-469f-a0fa-fa46c6897158",
+              "name": "Workout deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "workout",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Workout ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d063ce40-d29a-4c96-9167-248c9b94d9df",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "workout",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Workout ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eb19bcef-c91a-46fc-b145-a7223829a635",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "workout",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Workout ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "63802e2e-b8cf-438c-9484-2c1dfe9c73f7",
+              "name": "Workout not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "workout",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Workout ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ua.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1479fd44-19fd-427a-a8c6-e25957e9faae",
+    "name": "MapMyFitness Devices Workouts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MapMyFitness API (Under Armour Connected Fitness API) provides RESTful access to fitness data including workouts, routes, user profiles, heart rate zones, fitness devices, and webhooks. The platform powers MapMyFitness, MapMyRun, MapMyRide, and MapMyWalk and supports over 400 partner apps and devices. Authentication uses OAuth 2.0.\n\nContact Support:\n Name: Under Armour Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

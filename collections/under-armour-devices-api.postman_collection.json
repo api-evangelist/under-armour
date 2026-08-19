@@ -1,0 +1,192 @@
+{
+  "item": [
+    {
+      "id": "4db239ab-4588-4a48-8379-b454dafcfaef",
+      "name": "Devices",
+      "description": {
+        "content": "Fitness device registration and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5838e7bd-38b3-4e3b-b85e-98aa80d2a66f",
+          "name": "List Devices",
+          "request": {
+            "name": "List Devices",
+            "description": {
+              "content": "Retrieves fitness devices registered to a user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v7.1",
+                "device",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<string>",
+                  "description": "(Required) User ID to retrieve devices for"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.ua.com/v7.1/oauth2/access_token/"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c41d0924-8535-456d-a5b9-61354f8851e4",
+              "name": "List of registered fitness devices",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "device",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_embedded\": {\n    \"devices\": [\n      {\n        \"name\": \"string\",\n        \"manufacturer\": \"string\",\n        \"model\": \"string\",\n        \"device_type\": \"string\",\n        \"created_datetime\": \"1998-05-25T18:27:13.458Z\"\n      },\n      {\n        \"name\": \"string\",\n        \"manufacturer\": \"string\",\n        \"model\": \"string\",\n        \"device_type\": \"string\",\n        \"created_datetime\": \"1988-01-31T11:23:08.595Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f261e4fc-44ee-486b-bb95-1613c5f3d4f9",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v7.1",
+                    "device",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ua.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1ccaca5c-c04e-4a57-9256-f990a67e4468",
+    "name": "MapMyFitness Devices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MapMyFitness API (Under Armour Connected Fitness API) provides RESTful access to fitness data including workouts, routes, user profiles, heart rate zones, fitness devices, and webhooks. The platform powers MapMyFitness, MapMyRun, MapMyRide, and MapMyWalk and supports over 400 partner apps and devices. Authentication uses OAuth 2.0.\n\nContact Support:\n Name: Under Armour Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

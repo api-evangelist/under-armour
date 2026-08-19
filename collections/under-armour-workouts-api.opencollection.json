@@ -1,0 +1,229 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MapMyFitness Devices Workouts API",
+    "version": "7.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workouts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Workouts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ua.com/v7.1/workout/",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "User resource href or ID to filter workouts by"
+              },
+              {
+                "name": "activity_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by activity type href or ID (supports multiple, comma-separated)"
+              },
+              {
+                "name": "updated_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter workouts updated before this ISO 8601 datetime"
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter workouts updated after this ISO 8601 datetime"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter workouts created before this ISO 8601 datetime"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter workouts created after this ISO 8601 datetime"
+              },
+              {
+                "name": "started_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter workouts started before this ISO 8601 datetime"
+              },
+              {
+                "name": "started_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter workouts started after this ISO 8601 datetime"
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Sort order — start_datetime or -start_datetime (descending)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/",
+              "accessTokenUrl": "https://api.ua.com/v7.1/oauth2/access_token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieves a paginated list of workouts for a user. Supports filtering by activity type, date range, and gear."
+        },
+        {
+          "info": {
+            "name": "Create Workout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ua.com/v7.1/workout/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/",
+              "accessTokenUrl": "https://api.ua.com/v7.1/oauth2/access_token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Creates a new workout for the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get Workout",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ua.com/v7.1/workout/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Workout ID"
+              },
+              {
+                "name": "field_set",
+                "value": "",
+                "type": "query",
+                "description": "Include additional data — use time_series for GPS/metric samples"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/",
+              "accessTokenUrl": "https://api.ua.com/v7.1/oauth2/access_token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieves a single workout by ID. Use field_set=time_series to include GPS and metric time series data."
+        },
+        {
+          "info": {
+            "name": "Update Workout",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ua.com/v7.1/workout/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Workout ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/",
+              "accessTokenUrl": "https://api.ua.com/v7.1/oauth2/access_token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Updates an existing workout. User must own the workout."
+        },
+        {
+          "info": {
+            "name": "Delete Workout",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.ua.com/v7.1/workout/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Workout ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/",
+              "accessTokenUrl": "https://api.ua.com/v7.1/oauth2/access_token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Deletes a workout. User must own the workout."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

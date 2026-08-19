@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MapMyFitness Devices Heart Rate Zones API",
+    "version": "7.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Heart Rate Zones",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Heart Rate Zones",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ua.com/v7.1/heart_rate_zone/",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "User ID to retrieve heart rate zones for"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/",
+              "accessTokenUrl": "https://api.ua.com/v7.1/oauth2/access_token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieves heart rate zone configuration for a user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MapMyFitness Devices Users API",
+    "version": "7.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Current User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ua.com/v7.1/user/self/",
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/",
+              "accessTokenUrl": "https://api.ua.com/v7.1/oauth2/access_token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieves the profile of the currently authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ua.com/v7.1/user/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/",
+              "accessTokenUrl": "https://api.ua.com/v7.1/oauth2/access_token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieves a user profile by ID."
+        },
+        {
+          "info": {
+            "name": "Update User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ua.com/v7.1/user/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User ID (must match authenticated user)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/",
+              "accessTokenUrl": "https://api.ua.com/v7.1/oauth2/access_token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Updates the authenticated user's profile."
+        },
+        {
+          "info": {
+            "name": "List Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ua.com/v7.1/user/",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search users by name or email"
+              },
+              {
+                "name": "friends_with",
+                "value": "",
+                "type": "query",
+                "description": "Get users that the specified user is friends with"
+              },
+              {
+                "name": "mutual_friends_for",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve mutual friend relationships"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Search by email address"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://www.mapmyfitness.com/v7.1/oauth2/authorize/",
+              "accessTokenUrl": "https://api.ua.com/v7.1/oauth2/access_token/",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Search for users or retrieve social connections."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
