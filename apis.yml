@@ -80,6 +80,8 @@ apis:
   humanURL: https://developer.mapmyfitness.com/
   baseURL: https://api.ua.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -94,6 +96,8 @@ apis:
   humanURL: https://developer.mapmyfitness.com/
   baseURL: https://api.ua.com
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
