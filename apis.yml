@@ -7,6 +7,18 @@ description: >-
   devices into third-party applications.
 url: https://raw.githubusercontent.com/api-evangelist/under-armour/refs/heads/main/apis.yml
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
