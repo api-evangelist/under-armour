@@ -1,0 +1,26 @@
+slug: under-armour
+provider: Under Armour
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Healthcare Providers
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Webhooks
+  spec_file: under-armour-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.78
+  evidence: POST /v7.1/webhook/ createWebhook 'Create Webhook'; schemas WebhookCreate, WebhookCollection;
+    description notes the API provides access to '... fitness devices, and webhooks'
+  reason: Operations manage the lifecycle of outbound event subscriptions that third-party partner apps
+    register against the platform, which is exactly Webhook & Event Subscription Management within the
+    developer/API ecosystem. Slight discount because it is generic integration plumbing.

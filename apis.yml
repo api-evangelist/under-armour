@@ -133,6 +133,9 @@ apis:
   - type: Authentication
     url: https://developer.mapmyfitness.com/docs/v71_OAuth_2_Intro/
 common:
+  - type: CapabilityMap
+    url: capabilities/under-armour-capability-edges.yml
+    name: Under Armour Business Capability Map
   - type: AgenticAccess
     url: agentic-access/under-armour-agentic-access.yml
   - type: DomainSecurity
