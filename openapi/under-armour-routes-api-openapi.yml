@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: MapMyFitness Devices Routes API
+  title: MapMyFitness Routes API
   description: The MapMyFitness API (Under Armour Connected Fitness API) provides RESTful access to fitness data including workouts, routes, user profiles, heart rate zones, fitness devices, and webhooks. The platform powers MapMyFitness, MapMyRun, MapMyRide, and MapMyWalk and supports over 400 partner apps and devices. Authentication uses OAuth 2.0.
   version: 7.1.0
   contact:
@@ -253,20 +253,6 @@ components:
         max_elevation:
           type: number
           description: Maximum elevation in meters (detailed field set)
-    RouteCollection:
-      type: object
-      properties:
-        total_count:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            routes:
-              type: array
-              items:
-                $ref: '#/components/schemas/Route'
-        _links:
-          type: object
     RouteCreate:
       type: object
       required:
@@ -289,6 +275,20 @@ components:
             type: array
             items:
               type: number
+    RouteCollection:
+      type: object
+      properties:
+        total_count:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            routes:
+              type: array
+              items:
+                $ref: '#/components/schemas/Route'
+        _links:
+          type: object
   securitySchemes:
     oauth2:
       type: oauth2

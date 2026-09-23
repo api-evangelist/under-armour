@@ -1,7 +1,9 @@
 ---
 title: Forever Is Made Now
 url: https://about.underarmour.com/en/stories/2024/03/forever-is-made-now.html
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Under Armour" press release artificial intelligence'
 position: 5
 source: serpapi-google

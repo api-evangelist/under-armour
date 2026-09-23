@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: MapMyFitness Devices Webhooks API
+  title: MapMyFitness Webhooks API
   description: The MapMyFitness API (Under Armour Connected Fitness API) provides RESTful access to fitness data including workouts, routes, user profiles, heart rate zones, fitness devices, and webhooks. The platform powers MapMyFitness, MapMyRun, MapMyRide, and MapMyWalk and supports over 400 partner apps and devices. Authentication uses OAuth 2.0.
   version: 7.1.0
   contact:
@@ -85,22 +85,6 @@ paths:
         - write
 components:
   schemas:
-    WebhookCreate:
-      type: object
-      required:
-      - callback_url
-      - event_type
-      properties:
-        callback_url:
-          type: string
-          format: uri
-          description: URL to send webhook events to
-        event_type:
-          type: string
-          description: Event type — e.g., workout.create, workout.update, workout.delete
-        shared_secret:
-          type: string
-          description: Shared secret for HMAC verification
     Webhook:
       type: object
       properties:
@@ -117,6 +101,22 @@ components:
         shared_secret:
           type: string
           description: Secret for verifying webhook payloads
+    WebhookCreate:
+      type: object
+      required:
+      - callback_url
+      - event_type
+      properties:
+        callback_url:
+          type: string
+          format: uri
+          description: URL to send webhook events to
+        event_type:
+          type: string
+          description: Event type — e.g., workout.create, workout.update, workout.delete
+        shared_secret:
+          type: string
+          description: Shared secret for HMAC verification
     WebhookCollection:
       type: object
       properties:

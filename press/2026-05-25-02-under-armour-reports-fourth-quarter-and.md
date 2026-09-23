@@ -1,7 +1,9 @@
 ---
 title: UNDER ARMOUR REPORTS FOURTH QUARTER AND ...
 url: https://www.prnewswire.com/news-releases/under-armour-reports-fourth-quarter-and-full-year-fiscal-2026-results-provides-initial-fiscal-2027-outlook-302768815.html
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Under Armour" press release artificial intelligence'
 position: 2
 source: serpapi-google

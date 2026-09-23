@@ -1,7 +1,9 @@
 ---
 title: Under Armour Creates the Ultimate Team Talk Using ...
 url: https://about.underarmour.com/en/stories/2023/08/under-armour-creates-the-ultimate-team-talk-using-the-power-of-a.html
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Under Armour" press release artificial intelligence'
 position: 1
 source: serpapi-google

@@ -1,12 +1,7 @@
 {
   "provider": "under-armour",
   "sources": [
-    "under-armour-devices-api-openapi.yml",
-    "under-armour-heart-rate-zones-api-openapi.yml",
-    "under-armour-routes-api-openapi.yml",
-    "under-armour-users-api-openapi.yml",
-    "under-armour-webhooks-api-openapi.yml",
-    "under-armour-workouts-api-openapi.yml"
+    "_original/mapmyfitness-openapi.yml"
   ],
   "outputs": [
     "under-armour-devices-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "mapmyfitness-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "under-armour-devices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "under-armour-heart-rate-zones-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "under-armour-routes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "under-armour-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "under-armour-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "under-armour-workouts-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
