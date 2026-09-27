@@ -85,22 +85,16 @@ paths:
         - write
 components:
   schemas:
-    Webhook:
+    WebhookCollection:
       type: object
       properties:
-        id:
-          type: string
-          description: Webhook ID
-        callback_url:
-          type: string
-          format: uri
-          description: URL to send webhook events to
-        event_type:
-          type: string
-          description: Event type to subscribe to
-        shared_secret:
-          type: string
-          description: Secret for verifying webhook payloads
+        _embedded:
+          type: object
+          properties:
+            webhooks:
+              type: array
+              items:
+                $ref: '#/components/schemas/Webhook'
     WebhookCreate:
       type: object
       required:
@@ -117,16 +111,22 @@ components:
         shared_secret:
           type: string
           description: Shared secret for HMAC verification
-    WebhookCollection:
+    Webhook:
       type: object
       properties:
-        _embedded:
-          type: object
-          properties:
-            webhooks:
-              type: array
-              items:
-                $ref: '#/components/schemas/Webhook'
+        id:
+          type: string
+          description: Webhook ID
+        callback_url:
+          type: string
+          format: uri
+          description: URL to send webhook events to
+        event_type:
+          type: string
+          description: Event type to subscribe to
+        shared_secret:
+          type: string
+          description: Secret for verifying webhook payloads
   securitySchemes:
     oauth2:
       type: oauth2

@@ -237,6 +237,50 @@ paths:
         - write
 components:
   schemas:
+    Workout:
+      type: object
+      properties:
+        _links:
+          type: object
+          description: HATEOAS links to related resources
+        name:
+          type: string
+          description: Workout title
+        start_datetime:
+          type: string
+          format: date-time
+          description: ISO 8601 start time of the workout
+        start_locale_timezone:
+          type: string
+          description: IANA timezone of the workout location
+        aggregates:
+          $ref: '#/components/schemas/WorkoutAggregates'
+        activity_type:
+          type: object
+          description: Link to the activity type
+        source:
+          type: object
+          description: Data source information
+    WorkoutCreate:
+      type: object
+      required:
+      - name
+      - start_datetime
+      - start_locale_timezone
+      - aggregates
+      properties:
+        name:
+          type: string
+          description: Workout title
+        start_datetime:
+          type: string
+          format: date-time
+          description: ISO 8601 start time
+        start_locale_timezone:
+          type: string
+          description: IANA timezone
+        aggregates:
+          $ref: '#/components/schemas/WorkoutAggregates'
     WorkoutCollection:
       type: object
       properties:
@@ -281,50 +325,6 @@ components:
         heartrate_min:
           type: number
           description: Minimum heart rate in beats/minute
-    WorkoutCreate:
-      type: object
-      required:
-      - name
-      - start_datetime
-      - start_locale_timezone
-      - aggregates
-      properties:
-        name:
-          type: string
-          description: Workout title
-        start_datetime:
-          type: string
-          format: date-time
-          description: ISO 8601 start time
-        start_locale_timezone:
-          type: string
-          description: IANA timezone
-        aggregates:
-          $ref: '#/components/schemas/WorkoutAggregates'
-    Workout:
-      type: object
-      properties:
-        _links:
-          type: object
-          description: HATEOAS links to related resources
-        name:
-          type: string
-          description: Workout title
-        start_datetime:
-          type: string
-          format: date-time
-          description: ISO 8601 start time of the workout
-        start_locale_timezone:
-          type: string
-          description: IANA timezone of the workout location
-        aggregates:
-          $ref: '#/components/schemas/WorkoutAggregates'
-        activity_type:
-          type: object
-          description: Link to the activity type
-        source:
-          type: object
-          description: Data source information
   securitySchemes:
     oauth2:
       type: oauth2

@@ -140,6 +140,18 @@ paths:
         - read
 components:
   schemas:
+    UserCollection:
+      type: object
+      properties:
+        total_count:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            users:
+              type: array
+              items:
+                $ref: '#/components/schemas/User'
     User:
       type: object
       properties:
@@ -181,18 +193,6 @@ components:
           enum:
           - US
           - METRIC
-    UserCollection:
-      type: object
-      properties:
-        total_count:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            users:
-              type: array
-              items:
-                $ref: '#/components/schemas/User'
     UserUpdate:
       type: object
       properties:

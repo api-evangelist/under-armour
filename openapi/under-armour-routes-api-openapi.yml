@@ -253,6 +253,20 @@ components:
         max_elevation:
           type: number
           description: Maximum elevation in meters (detailed field set)
+    RouteCollection:
+      type: object
+      properties:
+        total_count:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            routes:
+              type: array
+              items:
+                $ref: '#/components/schemas/Route'
+        _links:
+          type: object
     RouteCreate:
       type: object
       required:
@@ -275,20 +289,6 @@ components:
             type: array
             items:
               type: number
-    RouteCollection:
-      type: object
-      properties:
-        total_count:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            routes:
-              type: array
-              items:
-                $ref: '#/components/schemas/Route'
-        _links:
-          type: object
   securitySchemes:
     oauth2:
       type: oauth2
