@@ -140,18 +140,6 @@ paths:
         - read
 components:
   schemas:
-    UserCollection:
-      type: object
-      properties:
-        total_count:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            users:
-              type: array
-              items:
-                $ref: '#/components/schemas/User'
     User:
       type: object
       properties:
@@ -214,6 +202,18 @@ components:
           type: number
         time_zone:
           type: string
+    UserCollection:
+      type: object
+      properties:
+        total_count:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            users:
+              type: array
+              items:
+                $ref: '#/components/schemas/User'
   securitySchemes:
     oauth2:
       type: oauth2

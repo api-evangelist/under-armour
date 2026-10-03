@@ -261,40 +261,6 @@ components:
         source:
           type: object
           description: Data source information
-    WorkoutCreate:
-      type: object
-      required:
-      - name
-      - start_datetime
-      - start_locale_timezone
-      - aggregates
-      properties:
-        name:
-          type: string
-          description: Workout title
-        start_datetime:
-          type: string
-          format: date-time
-          description: ISO 8601 start time
-        start_locale_timezone:
-          type: string
-          description: IANA timezone
-        aggregates:
-          $ref: '#/components/schemas/WorkoutAggregates'
-    WorkoutCollection:
-      type: object
-      properties:
-        total_count:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            workouts:
-              type: array
-              items:
-                $ref: '#/components/schemas/Workout'
-        _links:
-          type: object
     WorkoutAggregates:
       type: object
       properties:
@@ -325,6 +291,40 @@ components:
         heartrate_min:
           type: number
           description: Minimum heart rate in beats/minute
+    WorkoutCollection:
+      type: object
+      properties:
+        total_count:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            workouts:
+              type: array
+              items:
+                $ref: '#/components/schemas/Workout'
+        _links:
+          type: object
+    WorkoutCreate:
+      type: object
+      required:
+      - name
+      - start_datetime
+      - start_locale_timezone
+      - aggregates
+      properties:
+        name:
+          type: string
+          description: Workout title
+        start_datetime:
+          type: string
+          format: date-time
+          description: ISO 8601 start time
+        start_locale_timezone:
+          type: string
+          description: IANA timezone
+        aggregates:
+          $ref: '#/components/schemas/WorkoutAggregates'
   securitySchemes:
     oauth2:
       type: oauth2

@@ -85,16 +85,6 @@ paths:
         - write
 components:
   schemas:
-    WebhookCollection:
-      type: object
-      properties:
-        _embedded:
-          type: object
-          properties:
-            webhooks:
-              type: array
-              items:
-                $ref: '#/components/schemas/Webhook'
     WebhookCreate:
       type: object
       required:
@@ -111,6 +101,16 @@ components:
         shared_secret:
           type: string
           description: Shared secret for HMAC verification
+    WebhookCollection:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            webhooks:
+              type: array
+              items:
+                $ref: '#/components/schemas/Webhook'
     Webhook:
       type: object
       properties:

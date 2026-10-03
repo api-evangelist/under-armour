@@ -212,6 +212,42 @@ paths:
         - write
 components:
   schemas:
+    RouteCreate:
+      type: object
+      required:
+      - name
+      - distance
+      properties:
+        name:
+          type: string
+          description: Route name
+        description:
+          type: string
+          description: Route description
+        distance:
+          type: number
+          description: Route distance in meters
+        points:
+          type: array
+          description: GPS waypoints as [lng, lat, elevation] arrays
+          items:
+            type: array
+            items:
+              type: number
+    RouteCollection:
+      type: object
+      properties:
+        total_count:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            routes:
+              type: array
+              items:
+                $ref: '#/components/schemas/Route'
+        _links:
+          type: object
     Route:
       type: object
       properties:
@@ -253,42 +289,6 @@ components:
         max_elevation:
           type: number
           description: Maximum elevation in meters (detailed field set)
-    RouteCollection:
-      type: object
-      properties:
-        total_count:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            routes:
-              type: array
-              items:
-                $ref: '#/components/schemas/Route'
-        _links:
-          type: object
-    RouteCreate:
-      type: object
-      required:
-      - name
-      - distance
-      properties:
-        name:
-          type: string
-          description: Route name
-        description:
-          type: string
-          description: Route description
-        distance:
-          type: number
-          description: Route distance in meters
-        points:
-          type: array
-          description: GPS waypoints as [lng, lat, elevation] arrays
-          items:
-            type: array
-            items:
-              type: number
   securitySchemes:
     oauth2:
       type: oauth2

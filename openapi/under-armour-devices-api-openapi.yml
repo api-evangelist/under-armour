@@ -42,16 +42,6 @@ paths:
         - read
 components:
   schemas:
-    DeviceCollection:
-      type: object
-      properties:
-        _embedded:
-          type: object
-          properties:
-            devices:
-              type: array
-              items:
-                $ref: '#/components/schemas/Device'
     Device:
       type: object
       properties:
@@ -70,6 +60,16 @@ components:
         created_datetime:
           type: string
           format: date-time
+    DeviceCollection:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            devices:
+              type: array
+              items:
+                $ref: '#/components/schemas/Device'
   securitySchemes:
     oauth2:
       type: oauth2
