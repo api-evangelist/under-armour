@@ -237,30 +237,6 @@ paths:
         - write
 components:
   schemas:
-    Workout:
-      type: object
-      properties:
-        _links:
-          type: object
-          description: HATEOAS links to related resources
-        name:
-          type: string
-          description: Workout title
-        start_datetime:
-          type: string
-          format: date-time
-          description: ISO 8601 start time of the workout
-        start_locale_timezone:
-          type: string
-          description: IANA timezone of the workout location
-        aggregates:
-          $ref: '#/components/schemas/WorkoutAggregates'
-        activity_type:
-          type: object
-          description: Link to the activity type
-        source:
-          type: object
-          description: Data source information
     WorkoutAggregates:
       type: object
       properties:
@@ -291,20 +267,6 @@ components:
         heartrate_min:
           type: number
           description: Minimum heart rate in beats/minute
-    WorkoutCollection:
-      type: object
-      properties:
-        total_count:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            workouts:
-              type: array
-              items:
-                $ref: '#/components/schemas/Workout'
-        _links:
-          type: object
     WorkoutCreate:
       type: object
       required:
@@ -325,6 +287,44 @@ components:
           description: IANA timezone
         aggregates:
           $ref: '#/components/schemas/WorkoutAggregates'
+    Workout:
+      type: object
+      properties:
+        _links:
+          type: object
+          description: HATEOAS links to related resources
+        name:
+          type: string
+          description: Workout title
+        start_datetime:
+          type: string
+          format: date-time
+          description: ISO 8601 start time of the workout
+        start_locale_timezone:
+          type: string
+          description: IANA timezone of the workout location
+        aggregates:
+          $ref: '#/components/schemas/WorkoutAggregates'
+        activity_type:
+          type: object
+          description: Link to the activity type
+        source:
+          type: object
+          description: Data source information
+    WorkoutCollection:
+      type: object
+      properties:
+        total_count:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            workouts:
+              type: array
+              items:
+                $ref: '#/components/schemas/Workout'
+        _links:
+          type: object
   securitySchemes:
     oauth2:
       type: oauth2

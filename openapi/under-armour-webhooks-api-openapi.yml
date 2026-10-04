@@ -101,16 +101,6 @@ components:
         shared_secret:
           type: string
           description: Shared secret for HMAC verification
-    WebhookCollection:
-      type: object
-      properties:
-        _embedded:
-          type: object
-          properties:
-            webhooks:
-              type: array
-              items:
-                $ref: '#/components/schemas/Webhook'
     Webhook:
       type: object
       properties:
@@ -127,6 +117,16 @@ components:
         shared_secret:
           type: string
           description: Secret for verifying webhook payloads
+    WebhookCollection:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            webhooks:
+              type: array
+              items:
+                $ref: '#/components/schemas/Webhook'
   securitySchemes:
     oauth2:
       type: oauth2

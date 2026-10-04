@@ -212,28 +212,6 @@ paths:
         - write
 components:
   schemas:
-    RouteCreate:
-      type: object
-      required:
-      - name
-      - distance
-      properties:
-        name:
-          type: string
-          description: Route name
-        description:
-          type: string
-          description: Route description
-        distance:
-          type: number
-          description: Route distance in meters
-        points:
-          type: array
-          description: GPS waypoints as [lng, lat, elevation] arrays
-          items:
-            type: array
-            items:
-              type: number
     RouteCollection:
       type: object
       properties:
@@ -289,6 +267,28 @@ components:
         max_elevation:
           type: number
           description: Maximum elevation in meters (detailed field set)
+    RouteCreate:
+      type: object
+      required:
+      - name
+      - distance
+      properties:
+        name:
+          type: string
+          description: Route name
+        description:
+          type: string
+          description: Route description
+        distance:
+          type: number
+          description: Route distance in meters
+        points:
+          type: array
+          description: GPS waypoints as [lng, lat, elevation] arrays
+          items:
+            type: array
+            items:
+              type: number
   securitySchemes:
     oauth2:
       type: oauth2

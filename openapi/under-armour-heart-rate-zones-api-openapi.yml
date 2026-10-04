@@ -42,6 +42,18 @@ paths:
         - read
 components:
   schemas:
+    HeartRateZoneCollection:
+      type: object
+      properties:
+        total_count:
+          type: integer
+        _embedded:
+          type: object
+          properties:
+            heart_rate_zones:
+              type: array
+              items:
+                $ref: '#/components/schemas/HeartRateZone'
     HeartRateZone:
       type: object
       properties:
@@ -57,18 +69,6 @@ components:
         color:
           type: string
           description: Display color for the zone
-    HeartRateZoneCollection:
-      type: object
-      properties:
-        total_count:
-          type: integer
-        _embedded:
-          type: object
-          properties:
-            heart_rate_zones:
-              type: array
-              items:
-                $ref: '#/components/schemas/HeartRateZone'
   securitySchemes:
     oauth2:
       type: oauth2
