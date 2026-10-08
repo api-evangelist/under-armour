@@ -133,6 +133,12 @@ apis:
   - type: Authentication
     url: https://developer.mapmyfitness.com/docs/v71_OAuth_2_Intro/
 common:
+  - type: Plans
+    url: plans/under-armour-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/under-armour-rate-limits.yml
+  - type: FinOps
+    url: finops/under-armour-finops.yml
   - type: CapabilityMap
     url: capabilities/under-armour-capability-edges.yml
     name: Under Armour Business Capability Map
