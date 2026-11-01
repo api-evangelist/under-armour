@@ -1,4 +1,4 @@
-# Under Armour (under-armour)
+# Under Armour
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,69 +66,168 @@
 
 Under Armour is an American company that manufactures footwear, sports, and casual apparel known for its performance products designed for athletes. Under Armour operates a Connected Fitness platform — powered by MapMyFitness — that provides developer APIs for integrating workout tracking, route data, user profiles, heart rate zones, and fitness devices into third-party applications.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/under-armour/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/under-armour/refs/heads/main/apis.yml)
+**Areas:** Fitness · Health · Wearables · Connected Fitness · Sports · Fortune 1000
 
-## Scope
+## Under Armour on APIs.io
 
-- **Type:** Index
+Everything profiled for Under Armour is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/under-armour/](https://apis.io/providers/under-armour/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (6)
 
-- Fitness
-- Health
-- Wearables
-- Connected Fitness
-- Sports
-- Fortune 1000
+- [Under Armour Devices API](https://apis.io/apis/under-armour/under-armour-devices-api/) — Fitness device registration and management
+- [Under Armour Heart Rate Zones API](https://apis.io/apis/under-armour/under-armour-heart-rate-zones-api/) — Heart rate zone configuration and calculations
+- [Under Armour Routes API](https://apis.io/apis/under-armour/under-armour-routes-api/) — Manage running, cycling, and other fitness routes
+- [Under Armour Users API](https://apis.io/apis/under-armour/under-armour-users-api/) — User profile management and social connections
+- [Under Armour Webhooks API](https://apis.io/apis/under-armour/under-armour-webhooks-api/) — Event-driven webhook subscriptions
+- [Under Armour Workouts API](https://apis.io/apis/under-armour/under-armour-workouts-api/) — Create, retrieve, update, and delete fitness workouts
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-24
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### MapMyFitness API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The MapMyFitness API (Under Armour Connected Fitness API) provides RESTful access to fitness data including workouts, routes, user profiles, heart rate zones, fitness devices, and webhooks. The platform powers MapMyFitness, MapMyRun, MapMyRide, and MapMyWalk and supports over 400 partner apps and devices. Authentication uses OAuth 2.0.
+- [Under Armour Agentic Access](https://apis.io/agentic-access/under-armour/under-armour-agentic-access/)
 
-- **Human URL:** [https://developer.mapmyfitness.com/](https://developer.mapmyfitness.com/)
-- **Base URL:** `https://api.ua.com`
+#### JSON Schema (1)
 
-#### Tags
+The data models the API reads and writes.
 
-- Fitness
-- Workouts
-- Routes
-- Health
-- Connected Fitness
-- OAuth2
+- [Under Armour Workout](https://apis.io/schemas/under-armour/under-armour-workout/)
 
-#### Properties
+#### JSON Structure (1)
 
-- [Documentation](https://developer.mapmyfitness.com/docs/)
-- [Authentication](https://developer.mapmyfitness.com/docs/v71_OAuth_2_Intro/)
-- [OpenAPI](openapi/mapmyfitness-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/mapmyfitness.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mapmyfitness.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Data models expressed in JSON Structure.
 
-## Common Properties
+- [Under Armour Workout Structure](https://apis.io/json-structure/under-armour/under-armour-workout-structure/)
 
-- [LinkedIn](https://www.linkedin.com/company/under-armour)
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Under Armour Context](https://apis.io/jsonld/under-armour/under-armour-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Under Armour Vocabulary](https://apis.io/vocabularies/under-armour/under-armour-vocabulary/)
+
+#### Examples (1)
+
+Example requests and responses.
+
+- [Mapmyfitness List Workouts Example](https://apis.io/examples/under-armour/mapmyfitness-list-workouts-example/)
+
+#### Collections (7)
+
+Postman and Open Collection request collections.
+
+- [MapMyFitness API](https://apis.io/collections/under-armour/open-mapmyfitness/)
+- [MapMyFitness Devices API](https://apis.io/collections/under-armour/open-under-armour-devices-api/)
+- [MapMyFitness Devices Heart Rate Zones API](https://apis.io/collections/under-armour/open-under-armour-heart-rate-zones-api/)
+- [MapMyFitness Devices Routes API](https://apis.io/collections/under-armour/open-under-armour-routes-api/)
+- [MapMyFitness Devices Users API](https://apis.io/collections/under-armour/open-under-armour-users-api/)
+- [MapMyFitness Devices Webhooks API](https://apis.io/collections/under-armour/open-under-armour-webhooks-api/)
+- [MapMyFitness Devices Workouts API](https://apis.io/collections/under-armour/open-under-armour-workouts-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Under Armour — jsonschema rules](https://apis.io/rules/under-armour/under-armour-jsonschema-spectral-rules/)
+- [Under Armour API Rules](https://apis.io/rules/under-armour/under-armour-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Under Armour Authentication](https://apis.io/security/under-armour/under-armour-authentication/)
+- [Under Armour Domain Security](https://apis.io/security/under-armour/under-armour-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Under Armour Scopes](https://apis.io/scopes/under-armour/under-armour-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Under Armour Plans Pricing](https://apis.io/plans/under-armour/under-armour-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Under Armour Rate Limits](https://apis.io/rate-limits/under-armour/under-armour-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Under Armour Finops](https://apis.io/finops/under-armour/under-armour-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.under-armour.com)
-- [Developer  Portal](https://developer.mapmyfitness.com/)
 - [Documentation](https://developer.mapmyfitness.com/docs/)
-- [Authentication](https://developer.mapmyfitness.com/docs/v71_OAuth_2_Intro/)
-- [Terms of Service](https://developer.mapmyfitness.com/Terms_Of_Service/)
-- [Git Hub  Org](https://github.com/underarmour)
-- [OpenAPI](openapi/mapmyfitness-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [JSON-LD](json-ld/under-armour-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Vocabulary](vocabulary/under-armour-vocabulary.yml)
-- [Spectral  Rules](rules/under-armour-rules.yml)
-- [JSON Schema](json-schema/under-armour-workout-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [Capabilities](capabilities/connected-fitness.yaml)
+- [Terms of service](https://developer.mapmyfitness.com/Terms_Of_Service/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 37.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 58.0 |
+| Contract governance | 27.3 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 31.0 |
+| Access clarity | 15.8 |
+
+**Agent readiness 22.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 29.7** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/under-armour/](https://apis.io/providers/under-armour/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Under Armour: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/under-armour/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
